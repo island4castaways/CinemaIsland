@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1028071388369",
+    "project_id": "cinemaisland-84a35",
+    "storage_bucket": "cinemaisland-84a35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028071388369:android:b4794544fb8051e5dc01f0",
+        "android_client_info": {
+          "package_name": "com.example.cinemaisland"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028071388369-3fm12blnbpspgqp1k4h9gt1rm1bfjfrq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cinemaisland",
+            "certificate_hash": "3cd70315f044e3f2f322381b506af4be8c46db28"
+          }
+        },
+        {
+          "client_id": "1028071388369-k1t779t19uknc5ojt4onr6fm6mid6620.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNkjqv7keeb3JH5ELZkmMtSeZQcMQUkoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028071388369-k1t779t19uknc5ojt4onr6fm6mid6620.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
