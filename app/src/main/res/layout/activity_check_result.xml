@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".check.CheckResultActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="20dp">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="응모 결과 확인"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginVertical="20dp"/>
+
+    <RelativeLayout
+        android:id="@+id/inputView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+        <TextView
+            android:id="@+id/checkName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이름"
+            android:textSize="15dp"
+            android:layout_marginTop="5dp" />
+
+        <EditText
+            android:id="@+id/inputName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_below="@id/checkName"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/checkPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="휴대폰 번호"
+            android:textSize="15dp"
+            android:layout_below="@id/inputName"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/inputPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:layout_below="@id/checkPhone"
+            android:layout_marginTop="15dp" />
+
+        <TextView
+            android:id="@+id/checkEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이메일"
+            android:textSize="15dp"
+            android:layout_below="@id/inputPhone"
+            android:layout_marginTop="20dp" />
+
+        <EditText
+            android:id="@+id/inputEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:layout_below="@id/checkEmail"
+            android:layout_marginTop="15dp" />
+
+        <Button
+            android:id="@+id/submitBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="입장권 확인"
+            android:layout_below="@id/inputEmail"
+            android:layout_marginVertical="15dp"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/resultView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/resultText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="응모 결과"
+            android:layout_marginVertical="10dp"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/movieRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상영 정보"
+            android:layout_below="@id/resultText"
+            android:layout_marginTop="10dp" />
+
+        <Button
+            android:id="@+id/resetBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다시 조회하기"
+            android:layout_below="@id/movieRecyclerView"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+</LinearLayout>
