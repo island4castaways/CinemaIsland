@@ -1,41 +1,48 @@
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cinemaisland.NoticeItem
 import com.example.cinemaisland.R
-import com.example.cinemaisland.databinding.ActivityMainBinding
+import com.example.cinemaisland.notification.NoticeItem
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
-
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var noticeAdapter: NoticeAdapter
+    private lateinit var nRecyclerView: RecyclerView
+    private lateinit var nRecyclerAdapter: NoticeRecyclerAdapter
+    private lateinit var noticeItems: ArrayList<NoticeItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
 
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        //공지사항 리사이클러 뷰
+        nRecyclerView = findViewById(R.id.recyclerView)
 
-        noticeAdapter = NoticeAdapter()
-        recyclerView.adapter = noticeAdapter
+        /* initiate adapter */
+        nRecyclerAdapter = NoticeRecyclerAdapter { item ->
+            // 클릭 시 다른 화면으로 이동하고 제목과 본문을 전달
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("notice_title", item.notice_title)
+            intent.putExtra("notice_content", item.notice_content)
+            startActivity(intent)
+        }
 
-        // 공지사항 데이터 리스트 생성
-        val noticeList = createNoticeList()
-        noticeAdapter.submitList(noticeList)
-    }
+        /* initiate recyclerview */
+        nRecyclerView.adapter = nRecyclerAdapter
+        nRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-    private fun createNoticeList(): List<NoticeItem> {
-        val noticeList = mutableListOf<NoticeItem>()
-        // 여기에 공지사항 데이터를 생성하거나 가져오는 로직을 구현합니다.
-        // 예시로 몇 가지 하드코딩된 공지사항 아이템을 추가합니다.
-        noticeList.add(NoticeItem("공지사항 제목 1", "공지사항 내용 1"))
-        noticeList.add(NoticeItem("공지사항 제목 2", "공지사항 내용 2"))
-        noticeList.add(NoticeItem("공지사항 제목 3", "공지사항 내용 3"))
-        return noticeList
+        //공지사항 간격을 줄이고싶은데 모르겠...도와주십...사 ㅜㅜ
+//        /* set item spacing */
+//        val itemSpacing = resources.getDimensionPixelSize(R.dimen.item_spacing)
+//        nRecyclerView.addItemDecoration(RecyclerView.ItemDecoration(itemSpacing))
+
+        /* adapt data */
+        noticeItems = ArrayList()
+        for (i in 1..10) {
+            val noticeContent = "본문 내용 $i"
+            noticeItems.add(NoticeItem("id:$i", "$i 번째 제목", "날짜", noticeContent))
+        }
+        nRecyclerAdapter.setNoticeList(noticeItems)
     }
 }
