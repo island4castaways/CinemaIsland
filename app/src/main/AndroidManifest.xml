@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CinemaIsland">
         <activity
+            android:name=".MovieActivity"
+            android:exported="true" />
+        <activity
             android:name=".HomeActivity"
             android:exported="true" />
         <activity
@@ -25,7 +28,7 @@
             android:exported="true" />
         <activity
             android:name=".DetailActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
