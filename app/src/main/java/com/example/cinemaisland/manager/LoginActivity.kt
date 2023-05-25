@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityLoginBinding
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
@@ -28,15 +26,15 @@ class LoginActivity : AppCompatActivity() {
         binding.loginBtn.setOnClickListener {
             Log.d("ssum", "loginBtn Clicked")
             //입력 정보 가져오기
-            val managerId = binding.idInput.text.toString()
-            val managerPw = binding.passwordInput.text.toString()
+            val adminId = binding.inputId.text.toString()
+            val adminPw = binding.inputPw.text.toString()
             //id, pw DB에서 확인
             db.collection("admin_account").get()
                 .addOnSuccessListener { documents ->
                     for(document in documents) {
                         Log.d("ssum", "${document.id}, ${document.data}")
-                        if(document.data.getValue("id").toString().equals(managerId) &&
-                                document.data.getValue("password").toString().equals(managerPw)) {
+                        if(document.data.getValue("id").toString().equals(adminId) &&
+                                document.data.getValue("password").toString().equals(adminPw)) {
                             Log.d("ssum", "Manager Login successed")
                             mode = "login"
                             updateView()
@@ -56,8 +54,8 @@ class LoginActivity : AppCompatActivity() {
             Log.d("ssum", "logoutBtn Clicked")
             mode = "logout"
             //EditTextView 비우기
-            binding.idInput.text.clear()
-            binding.passwordInput.text.clear()
+            binding.inputId.text.clear()
+            binding.inputPw.text.clear()
             updateView()
         }
     }
