@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.cinemaisland.MyApplication
 import com.example.cinemaisland.databinding.ActivityCheckResultBinding
+import com.example.cinemaisland.model.ItemMovie
 import com.google.firebase.firestore.FirebaseFirestore
 
 class CheckResultActivity : AppCompatActivity() {
     lateinit var binding: ActivityCheckResultBinding
-    val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+    val db: FirebaseFirestore = MyApplication.db
     var mode = "default"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,10 @@ class CheckResultActivity : AppCompatActivity() {
                                 document.data.getValue("email").equals(email)) {
                             Log.d("ssum", "Winner searched")
                             mode = "searched"
+
+                            //resultView에 검색 정보 출력
+                            //db에 array type field data 받아오기
+
                             updateView()
                         } else {
                             Log.d("ssum", "Applicant has no prize")
@@ -44,9 +50,6 @@ class CheckResultActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     Log.d("ssum", "Error getting documents, $it")
                 }
-
-            //resultView에 검색 정보 출력
-
         }
 
         //resetBtn 클릭시
@@ -57,7 +60,7 @@ class CheckResultActivity : AppCompatActivity() {
         }
     }
 
-    fun updateView() {
+    private fun updateView() {
         if(mode == "searched") {
             //inputView 보이지 않게 설정
             binding.inputView.visibility = View.GONE
@@ -69,5 +72,9 @@ class CheckResultActivity : AppCompatActivity() {
             //inputView 보이게 설정
             binding.inputView.visibility = View.VISIBLE
         }
+    }
+
+    private fun makeRecyclerView() {
+
     }
 }
