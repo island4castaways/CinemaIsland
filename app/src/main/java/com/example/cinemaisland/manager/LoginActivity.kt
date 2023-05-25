@@ -15,6 +15,10 @@ class LoginActivity : AppCompatActivity() {
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     var mode = "logout"
 
+    /* DB에 저장된 관리자 정보
+    managerId : admin
+    managerPw : admin */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
