@@ -31,7 +31,7 @@
             android:layout_marginTop="10dp"/>
 
         <EditText
-            android:id="@+id/idInput"
+            android:id="@+id/inputId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -39,20 +39,20 @@
             android:layout_marginTop="10dp"/>
 
         <TextView
-            android:id="@+id/passwordText"
+            android:id="@+id/pwText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Password"
             android:textSize="20dp"
-            android:layout_below="@id/idInput"
+            android:layout_below="@id/inputId"
             android:layout_marginTop="20dp" />
 
         <EditText
-            android:id="@+id/passwordInput"
+            android:id="@+id/inputPw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:layout_below="@id/passwordText"
+            android:layout_below="@id/pwText"
             android:layout_marginTop="10dp" />
 
         <Button
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="로그인"
-            android:layout_below="@id/passwordInput"
+            android:layout_below="@id/inputPw"
             android:layout_marginVertical="10dp"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
