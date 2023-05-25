@@ -95,11 +95,10 @@
             android:layout_marginVertical="10dp"
             android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/movieRecyclerView"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/resultRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="상영 정보"
             android:layout_below="@id/resultText"
             android:layout_marginTop="10dp" />
 

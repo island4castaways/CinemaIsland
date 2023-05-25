@@ -1,6 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    //firebase 사용 설정
+    id 'com.google.gms.google-services'
+    //id 'kotlin-kapt' : Kotlin에서 자바 주석 프로세서 사용
+    //kapt deprecated -> KSP 사용 권장
+    //https://developer.android.com/studio/build/migrate-to-ksp?hl=ko
+    id 'com.google.devtools.ksp'
 }
 
 android {
@@ -15,6 +21,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
+        //multiDexEnabled 추가
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -30,8 +39,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    viewBinding{
-        enabled=true
+
+    viewBinding {
+        enabled = true
     }
 }
 
@@ -44,4 +54,22 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    
+    //firebase 사용 설정
+    implementation platform('com.google.firebase:firebase-bom:32.0.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.2'
+    //multidex 사용 설정
+    implementation 'androidx.multidex:multidex:2.0.1'
+    //auth 사용 설정
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
+    //firestore 사용 설정
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.6.0'
+    //storage 사용 설정
+    implementation 'com.google.firebase:firebase-storage-ktx:20.0.2'
+    implementation 'com.firebaseui:firebase-ui-storage:8.0.1'
+    //glide 사용 설정
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    implementation 'com.github.bumptech.glide:compiler:4.13.2'
+
 }
