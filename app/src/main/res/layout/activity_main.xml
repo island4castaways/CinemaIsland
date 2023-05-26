@@ -7,51 +7,5 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="공지사항"
-        android:textSize="20sp"
-        android:textColor="#000"
-        android:textStyle="bold"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/btn_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="다음" />
-
-        <Button
-            android:id="@+id/btn_prev"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="이전"
-            android:enabled="false" />
-
-        <TextView
-            android:id="@+id/page_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:paddingHorizontal="16dp" />
-
-    </LinearLayout>
 
 </LinearLayout>
