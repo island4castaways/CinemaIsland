@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CinemaIsland">
         <activity
+            android:name=".BoardActivity"
+            android:exported="true" />
+        <activity
             android:name=".MovieActivity"
             android:exported="true" />
         <activity
