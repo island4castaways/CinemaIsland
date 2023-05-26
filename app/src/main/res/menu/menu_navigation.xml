@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="홈"/>
+    <item
+        android:id="@+id/board"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="시사회 게시판"/>
+    <item
+        android:id="@+id/winner"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="당첨확인"/>
+</menu>
