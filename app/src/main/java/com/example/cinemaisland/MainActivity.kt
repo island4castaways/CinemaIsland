@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // 공지사항 리사이클러뷰
-        nRecyclerView = findViewById(R.id.recyclerView)
+        nRecyclerView = findViewById(R.id.notice_recyclerView)
 
         // 이전 버튼
         prevButton = findViewById(R.id.btn_prev)
