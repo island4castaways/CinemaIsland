@@ -10,8 +10,8 @@ import com.example.cinemaisland.R
 class NoticeRecyclerAdapter : RecyclerView.Adapter<NoticeRecyclerAdapter.ViewHolder>() {
 
     private var noticeList: ArrayList<NoticeItem> = ArrayList()
-    private var currentPage: Int = 1
-    private val itemsPerPage: Int = 10
+//    private var currentPage: Int = 1
+//    private val itemsPerPage: Int = 10
     private var expandedItemPosition: Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,7 +26,7 @@ class NoticeRecyclerAdapter : RecyclerView.Adapter<NoticeRecyclerAdapter.ViewHol
     fun setNoticeList(list: List<NoticeItem>) {
         noticeList.clear()
         noticeList.addAll(list)
-        updateNoticeList()
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
@@ -55,9 +55,9 @@ class NoticeRecyclerAdapter : RecyclerView.Adapter<NoticeRecyclerAdapter.ViewHol
         }
 
         fun onBind(item: NoticeItem) {
-            noticeTitle.text = item.notice_title
-            noticeDate.text = item.notice_date
-            noticeContent.text = item.notice_content
+            noticeTitle.text = item.title
+            noticeDate.text = item.date
+            noticeContent.text = item.content
 
             // 펼쳐진 아이템인 경우 본문을 보여주고, 그렇지 않은 경우 숨김 처리
             if (expandedItemPosition == adapterPosition) {
@@ -69,28 +69,28 @@ class NoticeRecyclerAdapter : RecyclerView.Adapter<NoticeRecyclerAdapter.ViewHol
     }
 
     private fun updateNoticeList() {
-        val start = (currentPage - 1) * itemsPerPage
-        val end = minOf(start + itemsPerPage, noticeList.size)
-        val sublist = noticeList.subList(start, end)
-        notifyDataSetChanged()
+//        val start = (currentPage - 1) * itemsPerPage
+//        val end = minOf(start + itemsPerPage, noticeList.size)
+//        val sublist = noticeList.subList(start, end)
+//        notifyDataSetChanged()
     }
 
-    fun goToPreviousPage() {
-        if (currentPage > 1) {
-            currentPage--
-            updateNoticeList()
-        }
-    }
-
-    fun goToNextPage() {
-        val totalPages = getTotalPages()
-        if (currentPage < totalPages) {
-            currentPage++
-            updateNoticeList()
-        }
-    }
-
-    private fun getTotalPages(): Int {
-        return (noticeList.size + itemsPerPage - 1) / itemsPerPage
-    }
+//    fun goToPreviousPage() {
+//        if (currentPage > 1) {
+//            currentPage--
+//            updateNoticeList()
+//        }
+//    }
+//
+//    fun goToNextPage() {
+//        val totalPages = getTotalPages()
+//        if (currentPage < totalPages) {
+//            currentPage++
+//            updateNoticeList()
+//        }
+//    }
+//
+//    private fun getTotalPages(): Int {
+//        return (noticeList.size + itemsPerPage - 1) / itemsPerPage
+//    }
 }
