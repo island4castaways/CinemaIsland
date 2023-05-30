@@ -1,25 +1,24 @@
 package com.example.cinemaisland.check
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cinemaisland.BaseActivity
 import com.example.cinemaisland.MyApplication
+import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityCheckResultBinding
 import com.example.cinemaisland.model.MovieItem
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 
-class CheckResultActivity : AppCompatActivity() {
+class CheckResultActivity : BaseActivity() {
     lateinit var binding: ActivityCheckResultBinding
     val db: FirebaseFirestore = MyApplication.db
     var mode = "default"
@@ -29,7 +28,7 @@ class CheckResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCheckResultBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        findViewById<FrameLayout>(R.id.activity_content).addView(binding.root)
 
         //submitBtn 클릭시
         binding.submitBtn.setOnClickListener {
@@ -120,5 +119,9 @@ class CheckResultActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+    }
+
+    override fun getLayoutResId(): Int {
+        return R.layout.activity_check_result
     }
 }
