@@ -1,10 +1,15 @@
 package com.example.cinemaisland.manager
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.Toast
+import com.example.cinemaisland.HomeActivity
+import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityLoginBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -57,6 +62,14 @@ class LoginActivity : AppCompatActivity() {
             binding.inputId.text.clear()
             binding.inputPw.text.clear()
             updateView()
+        }
+
+        //로그아웃 버튼 클릭시 홈으로 이동
+        val logoutBtn = findViewById<Button>(R.id.logoutBtn)
+        logoutBtn.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
