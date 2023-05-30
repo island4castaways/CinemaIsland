@@ -43,11 +43,6 @@
         android:textStyle="bold"
         android:textColor="#8F8F8F" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="수정하기" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMovie"
         android:layout_width="match_parent"
