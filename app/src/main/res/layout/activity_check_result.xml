@@ -107,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="다시 조회하기"
-            android:layout_below="@id/movieRecyclerView"
+            android:layout_below="@id/resultRecyclerView"
             android:layout_marginTop="10dp"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
