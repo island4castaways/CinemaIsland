@@ -9,13 +9,13 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cinemaisland.databinding.FragmentNotificationBinding
-import com.example.cinemaisland.notification.NoticeItem
-import com.example.cinemaisland.notification.NoticeRecyclerAdapter
+import com.example.cinemaisland.databinding.FragmentNoticeBinding
+import com.example.cinemaisland.notice.NoticeItem
+import com.example.cinemaisland.notice.NoticeRecyclerAdapter
 import kotlin.math.ceil
 
 
-class NotificationFragment : Fragment() {
+class NoticeFragment : Fragment() {
 
     private lateinit var nRecyclerView: RecyclerView
     private lateinit var nRecyclerAdapter: NoticeRecyclerAdapter
@@ -33,7 +33,7 @@ class NotificationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding = FragmentNotificationBinding.inflate(inflater,container,false)
+        val binding = FragmentNoticeBinding.inflate(inflater,container,false)
 
         // 공지사항 리사이클러뷰
         nRecyclerView = binding.recyclerView

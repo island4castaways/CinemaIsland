@@ -1,4 +1,4 @@
-package com.example.cinemaisland.notification
+package com.example.cinemaisland.notice
 
 data class NoticeItem(
     @field:JvmField

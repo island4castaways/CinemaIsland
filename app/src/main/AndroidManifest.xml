@@ -31,9 +31,6 @@
             android:name=".check.CheckResultActivity"
             android:exported="true" />
         <activity
-            android:name=".DetailActivity"
-            android:exported="true" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
