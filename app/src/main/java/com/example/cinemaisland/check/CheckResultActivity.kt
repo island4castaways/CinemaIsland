@@ -23,7 +23,6 @@ class CheckResultActivity : BaseActivity() {
     val db: FirebaseFirestore = MyApplication.db
     var mode = "default"
     var movies = ArrayList<String>()
-    var documentId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +49,6 @@ class CheckResultActivity : BaseActivity() {
                                     document.data.getValue("email").equals(email)
                                 ) {
                                     Log.d("ssum", "Applicant searched")
-                                    documentId = document.id.toString()
                                     mode = "searched"
 
                                     //검색된 응모자 정보에서 당첨된 영화 목록 가져오기
@@ -97,6 +95,7 @@ class CheckResultActivity : BaseActivity() {
     }
 
     private fun makeRecyclerView(moviesList: ArrayList<String>) {
+        //응모자의 movies list에 있는 영화를 movie collection에서 가져오기
         db.collection("movie").get()
             .addOnCompleteListener { task ->
                 for (document in task.result) {
@@ -104,7 +103,6 @@ class CheckResultActivity : BaseActivity() {
                         val itemList = mutableListOf<MovieItem>()
                         if (document.data.getValue("title").equals(movie)) {
                             val item = document.toObject(MovieItem::class.java)
-                            item.id = document.id
                             itemList.add(item)
                         }
                         binding.resultRecyclerView.layoutManager = LinearLayoutManager(this)
