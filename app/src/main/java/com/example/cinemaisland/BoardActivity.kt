@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.FrameLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -14,47 +15,30 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 lateinit var toggle: ActionBarDrawerToggle
 
-class BoardActivity : AppCompatActivity() {
+class BoardActivity : BaseActivity() {
     lateinit var binding: ActivityBoardBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBoardBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        //툴바 적용
+        findViewById<FrameLayout>(R.id.activity_content).addView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-        toggle = ActionBarDrawerToggle(this, binding.drawer, R.string.drawer_opened, R.string.drawer_closed)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toggle.syncState()
+
+//        setSupportActionBar(binding.toolbar)
+//        toggle = ActionBarDrawerToggle(this, binding.drawer, R.string.drawer_opened, R.string.drawer_closed)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        toggle.syncState()
 
         val adapter = MyPageAdapter(this)
         binding.viewpager.adapter=adapter
         TabLayoutMediator(binding.tabs, binding.viewpager){tab, position ->
-            tab.text = "Tab${(position +1)}"
-        }.attach()
-
-
-
-        binding.navigation.setNavigationItemSelectedListener{menuItem->
-            when(menuItem.itemId){
-                R.id.home->{
-                    val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
-                    true
-                }
-                R.id.board ->{
-                    val intent = Intent(this, BoardActivity::class.java)
-                    startActivity(intent)
-                    true
-                }
-                R.id.winner ->{
-                    val intent = Intent(this, MovieActivity::class.java)    //아직 없어서 임의 지정
-                    startActivity(intent)
-                    true
-                }
-                else ->false
+            when(position){
+                0-> tab.text="공지사항"
+                1-> tab.text="진행중인 응모"
+                2-> tab.text="완료된 응모"
+                else-> true
             }
-        }
-
+        }.attach()
 
     }
     class MyPageAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
@@ -68,11 +52,9 @@ class BoardActivity : AppCompatActivity() {
         override fun createFragment(position: Int): Fragment = fragments[position]
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item)){
-            return true
-        }
-        return super.onOptionsItemSelected(item)
+    override fun getLayoutResId(): Int {
+        return R.layout.activity_board
     }
+
 
 }
