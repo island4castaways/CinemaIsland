@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cinemaisland.databinding.ActivityBaseBinding
 import com.example.cinemaisland.databinding.ActivityBoardBinding
+import com.example.cinemaisland.manager.LoginActivity
 
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -46,6 +47,11 @@ abstract class BaseActivity : AppCompatActivity() {
                 }
                 R.id.winner ->{
                     val intent = Intent(this, MovieActivity::class.java)    //아직 없어서 임의 지정
+                    startActivity(intent)
+                    true
+                }
+                R.id.admin ->{
+                    val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     true
                 }

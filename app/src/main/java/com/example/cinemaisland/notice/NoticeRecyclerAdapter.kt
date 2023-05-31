@@ -1,4 +1,4 @@
-package com.example.cinemaisland.notification
+package com.example.cinemaisland.notice
 
 import android.view.LayoutInflater
 import android.view.View

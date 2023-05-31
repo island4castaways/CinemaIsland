@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinemaisland.databinding.ItemResultBinding
-import com.example.cinemaisland.model.ItemMovie
+import com.example.cinemaisland.model.MovieItem
 import com.example.cinemaisland.util.dateToString
 
 class ResultViewHolder(val binding: ItemResultBinding): RecyclerView.ViewHolder(binding.root)
 
-class ResultRecyclerAdapter(val context: Context, val itemList: MutableList<ItemMovie>): RecyclerView.Adapter<ResultViewHolder>() {
+class ResultRecyclerAdapter(val context: Context, val itemList: MutableList<MovieItem>): RecyclerView.Adapter<ResultViewHolder>() {
     override fun getItemCount(): Int {
         return itemList.size
     }
@@ -29,7 +29,6 @@ class ResultRecyclerAdapter(val context: Context, val itemList: MutableList<Item
             movieDirector.text = movieDirector.text.toString() + result.director
             movieRating.text = movieRating.text.toString() + result.rating.toString()
             movieGenre.text = movieGenre.text.toString() + result.genre
-            movieNation.text = movieNation.text.toString() + result.nation
         }
     }
 }

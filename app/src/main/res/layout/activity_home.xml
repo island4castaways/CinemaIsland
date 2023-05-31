@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,76 +8,78 @@
     tools:context=".HomeActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="15dp"
-        android:layout_margin="10dp">
-        <ImageView
-            android:id="@+id/theater_inner"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@drawable/theater_2"/>
-        <ImageView
-            android:id="@+id/theater_outter"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@drawable/theater_2"/>
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cinema" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-            <View
-                android:layout_width="2dp"
-                android:layout_height="match_parent"
-                android:background="#dddddd" />
+            android:layout_marginLeft="10dp"
+            android:text="@string/theater_info"
+            android:textSize="21dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/theater_info"
-                android:textSize="10dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/theater_info2"
+            android:textSize="14dp" />
 
-        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/theater_info3"
+            android:textSize="18dp"
+            android:textStyle="italic" />
 
     </LinearLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <!-- 다른 뷰들 -->
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="#5EDDDDDD"
-            android:orientation="vertical">
+            android:layout_marginLeft="10dp"
+            android:text="@string/location"
+            android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="10dp"
-                android:textColor="#A8A8A8"
-                android:textAlignment="center"
-                android:text="서울특별시 마포구 신촌로 94 그랜드플라자 7층" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="서울특별시 마포구 신촌로 94 그랜드플라자 7층"
+            android:textAlignment="center"
+            android:textColor="#7A7A7A"
+            android:textSize="10dp" />
 
-            <TextView
-                android:id="@+id/phoneNumberTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#A8A8A8"
-                android:textAlignment="center"
-                android:textSize="10dp"
-                android:text="02-716-1006" />
+<!--        <ImageView-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:src="@drawable/location"/>-->
 
-        </LinearLayout>
 
-    </RelativeLayout>
+
+
+
+    </LinearLayout>
 
 
 </LinearLayout>
