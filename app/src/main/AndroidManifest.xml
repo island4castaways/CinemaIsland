@@ -12,20 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CinemaIsland">
         <activity
-            android:name=".MovieWriteActivity"
+            android:name=".MovieActivity"
             android:exported="true" />
-        <activity
-            android:name=".NotiWriteActivity"
-            android:exported="true" />
-        <activity
-            android:name=".movie.MovieActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".HomeActivity"
             android:exported="true" />
