@@ -1,17 +1,19 @@
 package com.example.cinemaisland.manager
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.Toast
-import com.example.cinemaisland.BaseActivity
+import com.example.cinemaisland.HomeActivity
 import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityLoginBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
-class LoginActivity : BaseActivity() {
+class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     var mode = "logout"
@@ -23,7 +25,7 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        findViewById<FrameLayout>(R.id.activity_content).addView(binding.root)
+        setContentView(binding.root)
 
         //로그인 버튼 클릭시
         binding.loginBtn.setOnClickListener {
@@ -61,6 +63,14 @@ class LoginActivity : BaseActivity() {
             binding.inputPw.text.clear()
             updateView()
         }
+
+        //로그아웃 버튼 클릭시 홈으로 이동
+        val logoutBtn = findViewById<Button>(R.id.logoutBtn)
+        logoutBtn.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     fun updateView() {
@@ -79,9 +89,5 @@ class LoginActivity : BaseActivity() {
             //logoutBtn 보이지 않게 설정
             binding.logoutBtn.visibility = View.GONE
         }
-    }
-
-    override fun getLayoutResId(): Int {
-        return R.layout.activity_login
     }
 }
