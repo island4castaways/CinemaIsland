@@ -8,12 +8,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.Toast
+import com.example.cinemaisland.BaseActivity
 import com.example.cinemaisland.HomeActivity
 import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityLoginBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     lateinit var binding: ActivityLoginBinding
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     var mode = "logout"
@@ -25,7 +26,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+//        setContentView(binding.root)
+        //툴바 적용
+        findViewById<FrameLayout>(R.id.activity_content).addView(binding.root)
 
         //로그인 버튼 클릭시
         binding.loginBtn.setOnClickListener {
@@ -89,5 +92,9 @@ class LoginActivity : AppCompatActivity() {
             //logoutBtn 보이지 않게 설정
             binding.logoutBtn.visibility = View.GONE
         }
+
+    }
+    override fun getLayoutResId(): Int {
+        return R.layout.activity_login
     }
 }
