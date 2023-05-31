@@ -15,7 +15,7 @@ class NoticeRecyclerAdapter : RecyclerView.Adapter<NoticeRecyclerAdapter.ViewHol
     private var expandedItemPosition: Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recyclerview, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.notice_recyclerview, parent, false)
         return ViewHolder(view)
     }
 

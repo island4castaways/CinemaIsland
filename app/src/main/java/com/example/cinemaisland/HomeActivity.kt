@@ -2,18 +2,17 @@ package com.example.cinemaisland
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.FrameLayout
+import android.widget.TextView
 import com.example.cinemaisland.databinding.ActivityHomeBinding
+import android.telephony.PhoneNumberFormattingTextWatcher
 
-class HomeActivity : BaseActivity() {
+
+class HomeActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityHomeBinding.inflate(layoutInflater)
-        findViewById<FrameLayout>(R.id.activity_content).addView(binding.root)
 
-    }
-
-    override fun getLayoutResId(): Int {
-        return R.layout.activity_home
+        setContentView(binding.root)
     }
 }
