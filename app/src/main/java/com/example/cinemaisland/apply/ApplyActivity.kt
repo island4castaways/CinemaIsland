@@ -10,10 +10,15 @@ import com.example.cinemaisland.BaseActivity
 import com.example.cinemaisland.MyApplication
 import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityApplyBinding
+import com.example.cinemaisland.model.Applicant
+import com.example.cinemaisland.model.MovieItem
+import com.example.cinemaisland.util.stringToDate
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.firestore.FieldValue
+import java.util.Date
 import java.util.concurrent.TimeUnit
 
 class ApplyActivity : BaseActivity() {
@@ -22,7 +27,10 @@ class ApplyActivity : BaseActivity() {
     lateinit var phone: String
     lateinit var email: String
     lateinit var birthDate: String
-    var mode = ""
+
+    lateinit var movie: MovieItem
+
+    var mode = "default"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,8 +98,50 @@ class ApplyActivity : BaseActivity() {
                 Log.d("ssum", "inputBirthDate 입력 오류")
                 Toast.makeText(this, "생년월일을 확인해주세요.", Toast.LENGTH_SHORT).show()
             } else {
-                //DB에 저장
+                //DB에 검색
+                val applicant = Applicant()
+                applicant.name = name
+                applicant.phone = phone
+                applicant.email = email
+                applicant.birthDate = stringToDate(birthDate)
+                applicant.id = "$name$phone"
+                val documentRef = MyApplication.db.collection("applicant").document("$name$phone")
+                var searched: Boolean = false
 
+                MyApplication.db.collection("applicant").get()
+                    .addOnCompleteListener { task ->
+                        for(document in task.result) {
+                            if(document.id == "$name$phone") {
+                                Log.d("ssum", "응모자 검색 결과, $name$phone")
+                                searched = true
+
+                                //검색된 응모자의 movies에 현재 movie.title 존재하는지 확인
+                                val array = document["movies"] as ArrayList<String>
+                                if(array.contains("${movie.title}")) {
+                                    Toast.makeText(this, "이미 응모된 시사회입니다.", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    documentRef.update("movies", FieldValue.arrayUnion("${movie.title}"))
+                                        .addOnCompleteListener {
+                                            Log.d("ssum", "movies 값 추가 완료")
+                                        }.addOnFailureListener {
+                                            Log.d("ssum", "movies 값 추가 실패")
+                                        }
+                                }
+                            }
+                        }
+                        if(!searched) {
+                            applicant.movies = arrayListOf("${movie.title}")
+                            MyApplication.db.collection("applicant").document("$name$phone")
+                                .set(applicant)
+                                .addOnCompleteListener {
+                                    Log.d("ssum", "응모자 추가 완료")
+                                }.addOnFailureListener {
+                                    Log.d("ssum", "응모자 추가 실패")
+                                }
+                        }
+                    }.addOnFailureListener {
+                        Log.d("ssum", "document 접근 실패")
+                    }
             }
         }
     }
