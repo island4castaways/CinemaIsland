@@ -16,7 +16,7 @@ class NotiWriteActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityNotiWriteBinding.inflate(layoutInflater)
         findViewById<FrameLayout>(R.id.activity_content).addView(binding.root)
-        var db: FirebaseFirestore = FirebaseFirestore.getInstance()
+        var db: FirebaseFirestore = MyApplication.db
 
         binding.saveBtn.setOnClickListener {
             val title = binding.inputTitle.text.toString()

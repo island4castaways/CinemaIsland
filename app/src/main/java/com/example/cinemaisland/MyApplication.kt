@@ -14,16 +14,20 @@ class MyApplication: MultiDexApplication() {
         lateinit var db: FirebaseFirestore
         lateinit var storage: FirebaseStorage
 
-        var email: String? = null
+        //전화번호 인증
+        var verificationId = ""
 
-        fun checkAuth(): Boolean {
-            val currentUser = auth.currentUser
-            return currentUser?.let {
-                email = currentUser.email
-                if(currentUser.isEmailVerified) true
-                else false
-            } ?: let { false }
-        }
+        //email 인증 사용시
+//        var email: String? = null
+//
+//        fun checkAuth(): Boolean {
+//            val currentUser = auth.currentUser
+//            return currentUser?.let {
+//                email = currentUser.email
+//                if(currentUser.isEmailVerified) true
+//                else false
+//            } ?: let { false }
+//        }
     }
 
     override fun onCreate() {

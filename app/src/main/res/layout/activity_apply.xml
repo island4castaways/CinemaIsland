@@ -1,9 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".apply.ApplyActivity">
+    android:orientation="vertical"
+    android:padding="10dp">
+    <TextView
+        android:id="@+id/movieTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="영화 제목 intent로 넘기기"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_marginVertical="10dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/movieSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="상영 시간 intent로 넘기기"
+        android:textSize="20dp"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp" />
+
+    <RelativeLayout
+        android:id="@+id/inputView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/nameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이름"
+            android:textSize="15dp"
+            android:layout_marginBottom="5dp" />
+
+        <EditText
+            android:id="@+id/inputName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameText"
+            android:inputType="text"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/phoneText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="휴대폰 번호"
+            android:textSize="15dp"
+            android:layout_below="@id/inputName"
+            android:layout_marginBottom="5dp" />
+
+        <LinearLayout
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phoneText"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+            <EditText
+                android:id="@+id/inputPhone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="phone"
+                android:layout_marginRight="5dp" />
+
+            <Button
+                android:id="@+id/sendBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="인증번호 전송" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/auth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/phone"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="인증번호"
+                android:textSize="15dp"
+                android:layout_marginBottom="5dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/inputAuth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:layout_marginRight="5dp" />
+
+                <Button
+                    android:id="@+id/authBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="인증하기" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/emailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이메일"
+            android:textSize="15dp"
+            android:layout_below="@id/auth"
+            android:layout_marginBottom="5dp" />
+
+        <EditText
+            android:id="@+id/inputEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/emailText"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/birthDateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="생년월일"
+            android:textSize="15dp"
+            android:layout_below="@id/inputEmail"
+            android:layout_marginBottom="5dp" />
+
+        <EditText
+            android:id="@+id/inputBirthDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/birthDateText"
+            android:inputType="date"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:id="@+id/submitBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="응모하기"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_below="@id/inputBirthDate"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</LinearLayout>
