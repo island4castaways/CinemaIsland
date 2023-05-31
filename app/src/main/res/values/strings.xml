@@ -4,4 +4,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_opened">Opened Drawer</string>
     <string name="drawer_closed">closed Drawer</string>
+    <string name="theater_info">상영관 정보</string>
+    <string name="theater_info2">사람들과 즐겁게 공유할 수 있는,
+시네마 아일랜드를 경험한 오늘을 행복한 마음으로 공유할 수 있도록
+</string>
+    <string name="theater_info3">Enjoy the movie at Cinema Island in advance!</string>
+    <string name="location">찾아 오시는 길</string>
 </resources>
