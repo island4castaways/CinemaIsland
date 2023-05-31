@@ -24,6 +24,7 @@
                 android:src="@drawable/ic_launcher_background" />
 
             <Button
+                android:id="@+id/select_photo_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="파일 선택" />
@@ -93,37 +94,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal">
-                <RadioButton
-                    android:id="@+id/actionGenre"
-                    android:layout_width="wrap_content"
+                <Spinner
+                    android:id="@+id/genre_spinner"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="액션"
-                    android:textSize="10dp"
-                    android:layout_weight="1" />
-
-                <RadioButton
-                    android:id="@+id/comedyGenre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="코미디"
-                    android:textSize="10dp"
-                    android:layout_weight="1" />
-
-                <RadioButton
-                    android:id="@+id/familyGenre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="키즈&amp;가족"
-                    android:textSize="10dp"
-                    android:layout_weight="1" />
-
-                <RadioButton
-                    android:id="@+id/romanceGenre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="로맨스"
-                    android:textSize="10dp"
-                    android:layout_weight="1" />
+                   />
 
             </LinearLayout>
 
