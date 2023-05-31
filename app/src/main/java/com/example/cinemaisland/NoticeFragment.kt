@@ -1,17 +1,27 @@
 package com.example.cinemaisland
 
+
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cinemaisland.databinding.FragmentNoticeBinding
 import com.example.cinemaisland.notice.NoticeItem
 import com.example.cinemaisland.notice.NoticeRecyclerAdapter
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlin.math.ceil
 
 
@@ -31,14 +41,21 @@ class NoticeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): RelativeLayout {
         // Inflate the layout for this fragment
-        val binding = FragmentNoticeBinding.inflate(inflater,container,false)
+        val binding = FragmentNoticeBinding.inflate(inflater, container, false)
 
-        // 공지사항 리사이클러뷰
-        nRecyclerView = binding.recyclerView
+        binding.writeButton.setOnClickListener {
+            val intent = Intent(activity, NotiWriteActivity::class.java)
+            startActivity(intent)
+        }
 
-        // 이전 버튼
+            var db: FirebaseFirestore = FirebaseFirestore.getInstance()
+
+            // 공지사항 리사이클러뷰
+            nRecyclerView = binding.recyclerView
+
+            // 이전 버튼
 //        prevButton = binding.btnPrev
 //        prevButton.setOnClickListener {
 //            if (currentPage > 1) {
@@ -47,7 +64,7 @@ class NoticeFragment : Fragment() {
 //            }
 //        }
 
-        // 다음 버튼
+            // 다음 버튼
 //        nextButton = binding.btnNext
 //        nextButton.setOnClickListener {
 //            val totalPages = getTotalPages()
@@ -60,25 +77,29 @@ class NoticeFragment : Fragment() {
 //        // 페이지 번호 텍스트뷰
 //        pageNumberTextView = binding.pageNumber
 
-        /* initiate adapter */
-        nRecyclerAdapter = NoticeRecyclerAdapter()
+            /* initiate adapter */
+            nRecyclerAdapter = NoticeRecyclerAdapter()
 
-        /* initiate recyclerview */
-        nRecyclerView.adapter = nRecyclerAdapter
-        nRecyclerView.layoutManager = LinearLayoutManager(context)
+            /* initiate recyclerview */
+            nRecyclerView.adapter = nRecyclerAdapter
+            nRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        /* adapt data */
-        noticeItems = ArrayList()
+            /* adapt data */
+            noticeItems = ArrayList<NoticeItem>()
+
+
 //        for (i in 1..30) { // 임의로 30개의 공지사항 아이템을 추가
 //            noticeItems.add(NoticeItem("id:${i}", "${i}번째 제목", "날짜", "본문"))
 //        }
 
-
-        nRecyclerAdapter.setNoticeList(noticeItems)
-
-
+            db.collection("notice").orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener { task ->
+                for (document in task.result) {
+                    noticeItems.add(document.toObject(NoticeItem::class.java))
+                }
+                Log.d("ssum", "$noticeItems")
+                nRecyclerAdapter.setNoticeList(noticeItems)
+            }
         return binding.root
-
     }
 
     private fun updateNoticeList() {
@@ -97,7 +118,5 @@ class NoticeFragment : Fragment() {
 //    private fun getTotalPages(): Int {
 //        return ceil(noticeItems.size.toDouble() / itemsPerPage).toInt()
 //    }
-
-
-
 }
+

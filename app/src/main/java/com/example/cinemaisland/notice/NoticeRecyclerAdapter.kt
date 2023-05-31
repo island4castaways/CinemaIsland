@@ -1,5 +1,6 @@
 package com.example.cinemaisland.notice
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,7 +57,7 @@ class NoticeRecyclerAdapter : RecyclerView.Adapter<NoticeRecyclerAdapter.ViewHol
 
         fun onBind(item: NoticeItem) {
             noticeTitle.text = item.title
-            noticeDate.text = item.date
+            noticeDate.text = item.date?.toDate().toString()
             noticeContent.text = item.content
 
             // 펼쳐진 아이템인 경우 본문을 보여주고, 그렇지 않은 경우 숨김 처리

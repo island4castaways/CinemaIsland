@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.cinemaisland.check.CheckResultActivity
 import com.example.cinemaisland.databinding.ActivityBaseBinding
 import com.example.cinemaisland.databinding.ActivityBoardBinding
 import com.example.cinemaisland.manager.LoginActivity
@@ -46,7 +47,7 @@ abstract class BaseActivity : AppCompatActivity() {
                     true
                 }
                 R.id.winner ->{
-                    val intent = Intent(this, MovieActivity::class.java)    //아직 없어서 임의 지정
+                    val intent = Intent(this, CheckResultActivity::class.java)    //아직 없어서 임의 지정
                     startActivity(intent)
                     true
                 }

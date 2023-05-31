@@ -40,23 +40,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/edittext_bg" />
 
-        <TextView
-            android:id="@+id/notice_editor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="작성자"
-            android:textSize="16dp"
-            android:layout_below="@id/inputTitle"
-            android:layout_marginTop="20dp" />
 
-        <EditText
-            android:id="@+id/inputEditor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:layout_below="@id/notice_editor"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edittext_bg" />
 
         <TextView
             android:id="@+id/notice_content"
@@ -64,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="내용"
             android:textSize="16dp"
-            android:layout_below="@id/inputEditor"
+            android:layout_below="@id/inputTitle"
             android:layout_marginTop="20dp" />
 
         <EditText
