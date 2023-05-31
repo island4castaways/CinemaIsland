@@ -1,11 +1,13 @@
 package com.example.cinemaisland.model
 
-import java.sql.Date
+import java.util.Date
 
 class Applicant {
-    val name: String? = null
-    val phone: String? = null
-    val email: String? = null
-    val birthDate: Date? = null
-    val movies: ArrayList<String>? = null
+    var id: String? = null
+    var name: String? = null
+    var phone: String? = null
+    var email: String? = null
+    var birthDate: Date? = null
+    var applied: ArrayList<String>? = null
+    var won: ArrayList<String>? = null
 }
