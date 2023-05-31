@@ -13,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CinemaIsland">
         <activity
-<<<<<<<<< Temporary merge branch 1
             android:name=".BaseActivity"
             android:exported="false" />
         <activity
@@ -21,10 +20,10 @@
             android:exported="true" />
         <activity
             android:name=".MovieActivity"
-=========
-            android:name=".MovieWriteActivity"
->>>>>>>>> Temporary merge branch 2
             android:exported="true" />
+        <activity
+            android:name=".MovieWriteActivity"
+            android:exported="true"/>
         <activity
             android:name=".NotiWriteActivity"
             android:exported="true" />
