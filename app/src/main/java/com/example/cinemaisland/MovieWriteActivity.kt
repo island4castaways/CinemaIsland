@@ -18,16 +18,16 @@ class MovieWriteActivity : AppCompatActivity() {
         binding = ActivityMovieWriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        genreToggleButton = findViewById(R.id.genreToggleButton)
-        genreMenuLayout = findViewById(R.id.genreMenuLayout)
-
-        //토글 버튼 클릭시 아래 메뉴
-        genreToggleButton.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                genreMenuLayout.visibility = View.VISIBLE
-            } else {
-                genreMenuLayout.visibility = View.GONE
-            }
-        }
+//        genreToggleButton = findViewById(R.id.genreToggleButton)
+//        genreMenuLayout = findViewById(R.id.genreMenuLayout)
+//
+//        //토글 버튼 클릭시 아래 메뉴
+//        genreToggleButton.setOnCheckedChangeListener { buttonView, isChecked ->
+//            if (isChecked) {
+//                genreMenuLayout.visibility = View.VISIBLE
+//            } else {
+//                genreMenuLayout.visibility = View.GONE
+//            }
+//        }
     }
 }
