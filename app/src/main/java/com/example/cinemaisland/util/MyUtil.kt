@@ -7,7 +7,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import java.text.SimpleDateFormat
-import java.util.Date
 
 fun checkPermission(activity: AppCompatActivity, permissions: Array<String>) {
     val requestPermissionLauncher = activity.registerForActivityResult(
@@ -25,7 +24,7 @@ fun checkPermission(activity: AppCompatActivity, permissions: Array<String>) {
     }
 }
 
-fun dateToString(date: Date): String {
+fun dateToString(date: String): String {
     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
     return sdf.format(date)
 }

@@ -2,14 +2,72 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
-        android:icon="@android:drawable/ic_menu_share"
-        android:title="홈"/>
+        android:icon="@drawable/home"
+        android:title="홈" />
+
     <item
         android:id="@+id/board"
-        android:icon="@android:drawable/ic_menu_help"
-        android:title="시사회 게시판"/>
+        android:icon="@drawable/notice"
+        android:title="시사회 게시판" />
+
     <item
         android:id="@+id/winner"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="당첨확인"/>
+        android:icon="@drawable/ticket"
+        android:title="당첨자 확인" />
+
+    <item
+        android:id="@+id/empty_space1"
+        android:title=" "
+        android:enabled="false"
+        android:orderInCategory="100"
+        android:actionLayout="@layout/menu_item_empty_space" />
+
+    <item
+        android:id="@+id/empty_space2"
+        android:title=" "
+        android:enabled="false"
+        android:orderInCategory="100"
+        android:actionLayout="@layout/menu_item_empty_space" />
+    <item
+        android:id="@+id/empty_space3"
+        android:title=" "
+        android:enabled="false"
+        android:orderInCategory="100"
+        android:actionLayout="@layout/menu_item_empty_space" />
+    <item
+        android:id="@+id/empty_space4"
+        android:title=" "
+        android:enabled="false"
+        android:orderInCategory="100"
+        android:actionLayout="@layout/menu_item_empty_space" />
+    <item
+        android:id="@+id/empty_space5"
+        android:title=" "
+        android:enabled="false"
+        android:orderInCategory="100"
+        android:actionLayout="@layout/menu_item_empty_space" />
+    <item
+        android:id="@+id/empty_space6"
+        android:title=" "
+        android:enabled="false"
+        android:orderInCategory="100"
+        android:actionLayout="@layout/menu_item_empty_space" />
+    <item
+        android:id="@+id/empty_space7"
+        android:title=" "
+        android:enabled="false"
+        android:orderInCategory="100"
+        android:actionLayout="@layout/menu_item_empty_space" />
+
+
+    <group
+        android:id="@+id/admin_group"
+        android:checkableBehavior="none">
+
+        <item
+            android:id="@+id/admin"
+            android:icon="@drawable/admin"
+            android:title="관리자"
+            android:orderInCategory="100" />
+    </group>
 </menu>
