@@ -116,11 +116,11 @@ class ApplyActivity : BaseActivity() {
                                 searched = true
 
                                 //검색된 응모자의 movies에 현재 movie.title 존재하는지 확인
-                                val array = document["movies"] as ArrayList<String>
-                                if(array.contains("${movie.title}")) {
+                                val array = document["applied"] as ArrayList<String>
+                                if(array.contains("movie_demo2")) {
                                     Toast.makeText(this, "이미 응모된 시사회입니다.", Toast.LENGTH_SHORT).show()
                                 } else {
-                                    documentRef.update("movies", FieldValue.arrayUnion("${movie.title}"))
+                                    documentRef.update("applied", FieldValue.arrayUnion("movie_demo2"))
                                         .addOnCompleteListener {
                                             Log.d("ssum", "movies 값 추가 완료")
                                         }.addOnFailureListener {
@@ -130,7 +130,7 @@ class ApplyActivity : BaseActivity() {
                             }
                         }
                         if(!searched) {
-                            applicant.movies = arrayListOf("${movie.title}")
+                            applicant.applied = arrayListOf("movie_demo")
                             MyApplication.db.collection("applicant").document("$name$phone")
                                 .set(applicant)
                                 .addOnCompleteListener {
