@@ -11,7 +11,7 @@ import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityRaffleBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
-class raffleActivity : BaseActivity() {
+class RaffleActivity : BaseActivity() {
     lateinit var binding: ActivityRaffleBinding
     val db: FirebaseFirestore = MyApplication.db
     val movieTitle = "movie_demo"
