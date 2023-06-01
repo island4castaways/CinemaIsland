@@ -40,6 +40,9 @@
             android:name=".NotiWriteActivity"
             android:exported="true" />
         <activity
+            android:name=".MovieWriteActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
