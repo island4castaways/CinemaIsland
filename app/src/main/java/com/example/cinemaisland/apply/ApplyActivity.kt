@@ -14,14 +14,18 @@ import com.example.cinemaisland.model.Applicant
 import com.example.cinemaisland.model.MovieItem
 import com.example.cinemaisland.util.stringToDate
 import com.google.firebase.FirebaseException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
 class ApplyActivity : BaseActivity() {
+    val db: FirebaseFirestore = MyApplication.db
+    val auth: FirebaseAuth = MyApplication.auth
     lateinit var binding: ActivityApplyBinding
     lateinit var name: String
     lateinit var phone: String
@@ -64,7 +68,7 @@ class ApplyActivity : BaseActivity() {
                 }
             }
 
-            val optionsCompat = PhoneAuthOptions.newBuilder(MyApplication.auth)
+            val optionsCompat = PhoneAuthOptions.newBuilder(auth)
                 .setPhoneNumber(phone)
                 .setTimeout(60L, TimeUnit.SECONDS)
                 .setActivity(this)
@@ -72,7 +76,7 @@ class ApplyActivity : BaseActivity() {
                 .build()
 
             PhoneAuthProvider.verifyPhoneNumber(optionsCompat)
-            MyApplication.auth.setLanguageCode("kr")
+            auth.setLanguageCode("kr")
         }
 
         //authBtn 클릭시
@@ -105,10 +109,10 @@ class ApplyActivity : BaseActivity() {
                 applicant.email = email
                 applicant.birthDate = stringToDate(birthDate)
                 applicant.id = "$name$phone"
-                val documentRef = MyApplication.db.collection("applicant").document("$name$phone")
+                val documentRef = db.collection("applicant").document("$name$phone")
                 var searched: Boolean = false
 
-                MyApplication.db.collection("applicant").get()
+                db.collection("applicant").get()
                     .addOnCompleteListener { task ->
                         for(document in task.result) {
                             if(document.id == "$name$phone") {

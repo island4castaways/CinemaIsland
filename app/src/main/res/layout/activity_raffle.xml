@@ -1,90 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="응모자 추첨"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginVertical="20dp" />
-
-    <TextView
-        android:id="@+id/movieTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="영화 title intent로 받기"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_below="@id/title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp" />
-
-    <TextView
-        android:id="@+id/movieSchedule"
+    android:layout_height="match_parent">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="영화 상영 시간 intent로 받기"
-        android:textSize="15dp"
-        android:layout_below="@id/movieTitle"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="10dp" />
-
-    <TextView
-        android:id="@+id/movieRaffleDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="영화 추첨일 intent로 받기"
-        android:textSize="15dp"
-        android:layout_below="@id/movieSchedule"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="10dp" />
-
-    <TextView
-        android:id="@+id/applicantList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="응모자 내역\n응모자_이름+응모자_휴대폰번호\n...나열..?"
-        android:textSize="15dp"
-        android:layout_below="@id/movieRaffleDate"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="10dp" />
-
-    <Button
-        android:id="@+id/raffleBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="추첨하기"
-        android:textSize="15dp"
-        android:layout_below="@id/applicantList"
-        android:layout_centerHorizontal="true" />
-
-    <LinearLayout
-        android:id="@+id/resultView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/raffleBtn">
+        android:layout_height="match_parent"
+        android:padding="10dp">
         <TextView
-            android:id="@+id/resultText"
-            android:layout_width="match_parent"
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="추첨 결과"
+            android:text="응모자 추첨"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="20dp" />
+
+        <TextView
+            android:id="@+id/movieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="영화 title intent로 받기"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:gravity="center_horizontal"
-            android:layout_marginVertical="10dp" />
+            android:layout_below="@id/title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp" />
 
         <TextView
-            android:id="@+id/winnerList"
+            android:id="@+id/movieSchedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="당첨자 내역\n당첨자_이름+당첨자_휴대폰번호\n...나열?"
-            android:gravity="center_horizontal" />
-    </LinearLayout>
-</RelativeLayout>
+            android:text="영화 상영 시간 intent로 받기"
+            android:textSize="15dp"
+            android:layout_below="@id/movieTitle"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/movieRaffleDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="영화 추첨일 intent로 받기"
+            android:textSize="15dp"
+            android:layout_below="@id/movieSchedule"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/applicantList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="응모자 내역\n응모자_이름+응모자_휴대폰번호\n...나열..?"
+            android:textSize="15dp"
+            android:layout_below="@id/movieRaffleDate"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp" />
+
+        <Button
+            android:id="@+id/raffleBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="추첨하기"
+            android:textSize="15dp"
+            android:layout_below="@id/applicantList"
+            android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:id="@+id/resultView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/raffleBtn">
+            <TextView
+                android:id="@+id/resultText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="추첨 결과"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:layout_marginVertical="10dp" />
+
+            <TextView
+                android:id="@+id/winnerList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="당첨자 내역\n당첨자_이름+당첨자_휴대폰번호\n...나열?"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
