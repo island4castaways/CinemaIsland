@@ -64,7 +64,7 @@ class CheckResultActivity : BaseActivity() {
         }
     }
 
-    suspend private fun searchApplicant(name: String, phone: String, email: String): ArrayList<String> {
+    private suspend fun searchApplicant(name: String, phone: String, email: String): ArrayList<String> {
         val movies = ArrayList<String>()
         val querySnapshot = db.collection("applicant")
             .whereEqualTo("name", name)

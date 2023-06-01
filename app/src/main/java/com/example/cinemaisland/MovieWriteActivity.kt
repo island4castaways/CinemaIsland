@@ -12,6 +12,7 @@ import android.widget.FrameLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.cinemaisland.databinding.ActivityMovieWriteBinding
 import com.example.cinemaisland.model.MovieItem
+import com.example.cinemaisland.util.stringToDate
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -102,8 +103,8 @@ class MovieWriteActivity : BaseActivity() {
                         MovieItem.genre = genre
                         MovieItem.director = director
                         MovieItem.details = content
-                        MovieItem.raffleDate = pickDate
-                        MovieItem.schedule = runDate
+                        MovieItem.raffleDate = stringToDate(pickDate)
+                        MovieItem.schedule = stringToDate(runDate)
                         MovieItem.imageUrl=imageLink
 
                         db.collection("movie")
