@@ -25,7 +25,7 @@ class ResultRecyclerAdapter(val context: Context, val itemList: MutableList<Movi
 
         holder.binding.run {
             movieTitle.text = result.title
-//            movieSchedule.text = dateToString(result.schedule!!)
+            movieSchedule.text = result.schedule.toString()
             movieDirector.text = movieDirector.text.toString() + result.director
             movieRating.text = movieRating.text.toString() + result.rating.toString()
             movieGenre.text = movieGenre.text.toString() + result.genre

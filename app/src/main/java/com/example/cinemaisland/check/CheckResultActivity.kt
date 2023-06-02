@@ -15,14 +15,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 
 class CheckResultActivity : BaseActivity() {
     lateinit var binding: ActivityCheckResultBinding
     val db: FirebaseFirestore = MyApplication.db
     var mode = "default"
-    var movies = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,38 +36,10 @@ class CheckResultActivity : BaseActivity() {
             val email = binding.inputEmail.text.toString()
             CoroutineScope(Dispatchers.IO).launch {
                 //DB에서 확인
-                runBlocking {
-                    db.collection("applicant").get()
-                        .addOnCompleteListener { task ->
-                            val result = task.result
-                            for (document in result) {
-                                Log.d("ssum", "${document.id}, ${document.data}")
-                                if (document.data.getValue("name").toString().equals(name) &&
-                                    document.data.getValue("phone").equals(phone) &&
-                                    document.data.getValue("email").equals(email)
-                                ) {
-                                    Log.d("ssum", "Applicant searched")
-                                    mode = "searched"
-
-                                    //검색된 응모자 정보에서 당첨된 영화 목록 가져오기
-                                    movies = document["movies"] as ArrayList<String>
-                                    Log.d("ssum", "won movies : ${movies.toString()}")
-                                } else {
-                                    Log.d("ssum", "Applicant has no prize")
-                                    Toast.makeText(
-                                        this@CheckResultActivity,
-                                        "입력한 정보로 당첨된 응모 내역이 없습니다.",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                            }
-                            makeRecyclerView(movies)
-                            updateView()
-                        }.addOnFailureListener {
-                            Log.d("ssum", "Error getting applicantList, $it")
-                        }.await()
-                }
+                var movies = searchApplicant(name, phone, email)
+                makeRecyclerView(movies)
             }
+            updateView()
         }
 
         //resetBtn 클릭시
@@ -81,7 +51,7 @@ class CheckResultActivity : BaseActivity() {
     }
 
     private fun updateView() {
-        if (mode == "searched") {
+        if (mode == "listed") {
             //inputView 보이지 않게 설정
             binding.inputView.visibility = View.GONE
             //resultView 보이게 설정
@@ -94,21 +64,67 @@ class CheckResultActivity : BaseActivity() {
         }
     }
 
+    private suspend fun searchApplicant(name: String, phone: String, email: String): ArrayList<String> {
+        val movies = ArrayList<String>()
+        val querySnapshot = db.collection("applicant")
+            .whereEqualTo("name", name)
+            .whereEqualTo("phone", phone)
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener {
+                mode = "searched"
+                Log.d("ssum", "mode, $mode")
+            }
+            .addOnFailureListener {
+                Log.d("ssum", "Error getting documents")
+            }
+            .await()
+
+        if(!querySnapshot.isEmpty) {
+            val document = querySnapshot.documents[0]
+
+            val wonList = document["won"] as? ArrayList<String>
+            if(wonList != null) {
+                Log.d("ssum", "won movies : $wonList")
+                movies.addAll(wonList)
+            } else {
+                Log.d("ssum", "Applicants has no movie on won list")
+                Toast.makeText(
+                    this@CheckResultActivity,
+                    "입력한 정보로 당첨된 응모 내역이 없습니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        } else {
+            Log.d("ssum", "No applicant has searched")
+            Toast.makeText(
+                this@CheckResultActivity,
+                "입력한 정보로 존재하는 응모 내역이 없습니다.",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        return movies
+    }
+
     private fun makeRecyclerView(moviesList: ArrayList<String>) {
         //응모자의 movies list에 있는 영화를 movie collection에서 가져오기
         db.collection("movie").get()
             .addOnCompleteListener { task ->
+                val itemList = mutableListOf<MovieItem>()
                 for (document in task.result) {
                     for (movie in moviesList) {
-                        val itemList = mutableListOf<MovieItem>()
-                        if (document.data.getValue("title").equals(movie)) {
+                        if (document.data.getValue("title") == "$movie") {
                             val item = document.toObject(MovieItem::class.java)
                             itemList.add(item)
+                            Log.d("ssum", "${itemList}")
                         }
-                        binding.resultRecyclerView.layoutManager = LinearLayoutManager(this)
-                        binding.resultRecyclerView.adapter = ResultRecyclerAdapter(this, itemList)
                     }
                 }
+                binding.resultRecyclerView.layoutManager = LinearLayoutManager(this)
+                binding.resultRecyclerView.adapter = ResultRecyclerAdapter(this, itemList)
+                mode = "listed"
+                Log.d("ssum", "mode, $mode")
             }.addOnFailureListener {
                 Log.d("ssum", "Error getting moviesList, $it")
                 Toast.makeText(

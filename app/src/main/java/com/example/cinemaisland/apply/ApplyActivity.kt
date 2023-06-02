@@ -14,14 +14,18 @@ import com.example.cinemaisland.model.Applicant
 import com.example.cinemaisland.model.MovieItem
 import com.example.cinemaisland.util.stringToDate
 import com.google.firebase.FirebaseException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
 class ApplyActivity : BaseActivity() {
+    val db: FirebaseFirestore = MyApplication.db
+    val auth: FirebaseAuth = MyApplication.auth
     lateinit var binding: ActivityApplyBinding
     lateinit var name: String
     lateinit var phone: String
@@ -64,7 +68,7 @@ class ApplyActivity : BaseActivity() {
                 }
             }
 
-            val optionsCompat = PhoneAuthOptions.newBuilder(MyApplication.auth)
+            val optionsCompat = PhoneAuthOptions.newBuilder(auth)
                 .setPhoneNumber(phone)
                 .setTimeout(60L, TimeUnit.SECONDS)
                 .setActivity(this)
@@ -72,7 +76,7 @@ class ApplyActivity : BaseActivity() {
                 .build()
 
             PhoneAuthProvider.verifyPhoneNumber(optionsCompat)
-            MyApplication.auth.setLanguageCode("kr")
+            auth.setLanguageCode("kr")
         }
 
         //authBtn 클릭시
@@ -105,10 +109,10 @@ class ApplyActivity : BaseActivity() {
                 applicant.email = email
                 applicant.birthDate = stringToDate(birthDate)
                 applicant.id = "$name$phone"
-                val documentRef = MyApplication.db.collection("applicant").document("$name$phone")
+                val documentRef = db.collection("applicant").document("$name$phone")
                 var searched: Boolean = false
 
-                MyApplication.db.collection("applicant").get()
+                db.collection("applicant").get()
                     .addOnCompleteListener { task ->
                         for(document in task.result) {
                             if(document.id == "$name$phone") {
@@ -116,11 +120,11 @@ class ApplyActivity : BaseActivity() {
                                 searched = true
 
                                 //검색된 응모자의 movies에 현재 movie.title 존재하는지 확인
-                                val array = document["movies"] as ArrayList<String>
-                                if(array.contains("${movie.title}")) {
+                                val array = document["applied"] as ArrayList<String>
+                                if(array.contains("movie_demo2")) {
                                     Toast.makeText(this, "이미 응모된 시사회입니다.", Toast.LENGTH_SHORT).show()
                                 } else {
-                                    documentRef.update("movies", FieldValue.arrayUnion("${movie.title}"))
+                                    documentRef.update("applied", FieldValue.arrayUnion("movie_demo2"))
                                         .addOnCompleteListener {
                                             Log.d("ssum", "movies 값 추가 완료")
                                         }.addOnFailureListener {
@@ -130,7 +134,7 @@ class ApplyActivity : BaseActivity() {
                             }
                         }
                         if(!searched) {
-                            applicant.movies = arrayListOf("${movie.title}")
+                            applicant.applied = arrayListOf("movie_demo")
                             MyApplication.db.collection("applicant").document("$name$phone")
                                 .set(applicant)
                                 .addOnCompleteListener {

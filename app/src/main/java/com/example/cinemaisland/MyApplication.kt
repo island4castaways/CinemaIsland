@@ -17,6 +17,9 @@ class MyApplication: MultiDexApplication() {
         //전화번호 인증
         var verificationId = ""
 
+        //관리자 모드 여부
+        var managerMode = "off"
+
         //email 인증 사용시
 //        var email: String? = null
 //
