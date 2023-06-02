@@ -38,6 +38,10 @@ class OngoingEventFragment : Fragment() {
         val binding = FragmentOngoingEventBinding.inflate(inflater, container, false)
         val movieList: MutableList<MovieItem> = mutableListOf()
 
+        if(MyApplication.managerMode != "on") {
+            binding.movieWriteButton.visibility = View.GONE
+        }
+
         db.collection("movie")
             .orderBy("raffleDate", Query.Direction.DESCENDING)
             .get()

@@ -118,6 +118,12 @@
                     android:layout_height="35dp"
                     android:text="수정"
                     android:textSize="10dp"/>
+                <Button
+                    android:id="@+id/movie_raffle_btn"
+                    android:layout_width="75dp"
+                    android:layout_height="35dp"
+                    android:text="추첨"
+                    android:textSize="10dp" />
             </LinearLayout>
         </LinearLayout>
 

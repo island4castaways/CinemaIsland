@@ -9,8 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.cinemaisland.check.CheckResultActivity
 import com.example.cinemaisland.databinding.ActivityBaseBinding
 import com.example.cinemaisland.databinding.ActivityBoardBinding
-import com.example.cinemaisland.movie.MovieActivity
-
+import com.example.cinemaisland.manager.LoginActivity
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -23,35 +22,49 @@ abstract class BaseActivity : AppCompatActivity() {
         val toolbar = binding.toolbar
         setSupportActionBar(binding.toolbar);
 
-        if(useToolbar()){
+        if (useToolbar()) {
             setSupportActionBar(toolbar);
         } else {
             toolbar.setVisibility(View.GONE);
         }
 
         setSupportActionBar(binding.toolbar)
-        toggle = ActionBarDrawerToggle(this, binding.baseLayout, R.string.drawer_opened, R.string.drawer_closed)
+        toggle = ActionBarDrawerToggle(
+            this,
+            binding.baseLayout,
+            R.string.drawer_opened,
+            R.string.drawer_closed
+        )
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toggle.syncState()
 
-        binding.navigation.setNavigationItemSelectedListener{menuItem->
-            when(menuItem.itemId){
-                R.id.home->{
+        binding.navigation.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.home -> {
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                     true
                 }
-                R.id.board ->{
+
+                R.id.board -> {
                     val intent = Intent(this, BoardActivity::class.java)
                     startActivity(intent)
                     true
                 }
-                R.id.winner ->{
+
+                R.id.winner -> {
                     val intent = Intent(this, CheckResultActivity::class.java)
                     startActivity(intent)
                     true
                 }
-                else ->false
+
+                R.id.admin -> {
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                else -> false
             }
         }
 
@@ -66,7 +79,7 @@ abstract class BaseActivity : AppCompatActivity() {
     abstract fun getLayoutResId(): Int
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
             return true
         }
         return super.onOptionsItemSelected(item)

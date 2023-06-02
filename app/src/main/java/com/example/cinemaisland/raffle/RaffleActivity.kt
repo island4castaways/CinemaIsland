@@ -9,12 +9,15 @@ import com.example.cinemaisland.BaseActivity
 import com.example.cinemaisland.MyApplication
 import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityRaffleBinding
+import com.example.cinemaisland.model.MovieItem
+import com.example.cinemaisland.util.dateTimeToString
+import com.example.cinemaisland.util.dateToString
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RaffleActivity : BaseActivity() {
     lateinit var binding: ActivityRaffleBinding
     val db: FirebaseFirestore = MyApplication.db
-    val movieTitle = "movie_demo"
+    var movieTitle = ""
     var applicantText = ""
     var applicantList: ArrayList<String>? = null
     var winnerText = ""
@@ -25,31 +28,40 @@ class RaffleActivity : BaseActivity() {
         binding = ActivityRaffleBinding.inflate(layoutInflater)
         findViewById<FrameLayout>(R.id.activity_content).addView(binding.root)
 
+        val movieItem = intent.getSerializableExtra("movieItem") as? MovieItem
+        movieTitle = movieItem!!.title!!
+        binding.movieTitle.text = movieTitle
+        binding.movieSchedule.text = dateToString(movieItem.schedule!!)
+        binding.movieRaffleDate.text = dateTimeToString(movieItem.raffleDate!!)
+
         val querySnapshot = db.collection("movie")
             .whereEqualTo("title", "$movieTitle").get()
             .addOnSuccessListener { querySnapshot ->
                 Log.d("ssum", "movie $movieTitle document accessed")
-                for(document in querySnapshot) {
+                for (document in querySnapshot) {
                     //winners 배열 값 존재 확인 -> 추첨 여부 확인
                     winnerList = document["winners"] as? ArrayList<String>
-                    if(winnerList != null) {
+                    if (winnerList != null) {
                         //winner 값이 있을 경우 -> 이미 추첨 완료
                         binding.raffleBtn.visibility = View.GONE
-                        for(winner in winnerList!!) {
+                        for (winner in winnerList!!) {
                             Log.d("ssum", "$winner")
                             winnerText += "$winner\n"
                         }
                     } else {
                         binding.resultView.visibility = View.GONE
                     }
-                    
+
                     //applicants 배열 값 가져오기
                     applicantList = document["applicants"] as? ArrayList<String>
-                    if(applicantList != null) {
-                        for(applicant in applicantList!!) {
+                    if (applicantList != null) {
+                        for (applicant in applicantList!!) {
                             Log.d("ssum", "$applicant")
                             applicantText += "$applicant\n"
                         }
+                    } else {
+                        Log.d("ssum", "응모자 없음")
+                        applicantText = "응모자 없음"
                     }
                 }
                 binding.winnerList.text = winnerText
@@ -62,8 +74,8 @@ class RaffleActivity : BaseActivity() {
             Log.d("ssum", "raffleBtn clicked")
             binding.raffleBtn.visibility = View.GONE
             winnerList = runRaffle()
-            updateWinnerList(winnerList!!)
-            for(winner in winnerList!!) {
+            updateWinnerList("$movieTitle@${movieItem.director}", winnerList!!)
+            for (winner in winnerList!!) {
                 winnerText += "$winner\n"
             }
             binding.winnerList.text = winnerText
@@ -72,39 +84,39 @@ class RaffleActivity : BaseActivity() {
     }
 
     private fun runRaffle(): ArrayList<String> {
+        val winnerList = ArrayList<String>()
         //applicantList의 index로 사용할 randomNumber 20개 생성
         val random = java.util.Random()
         val numbers = mutableListOf<Int>()
-        val range = 0..(applicantList?.size ?: 0)
-        if((applicantList?.size ?: 0) > 0) {
-           while(numbers.size < 20) {
-               val randomNumber = random.nextInt(range.last - range.first + 1) + range.first
-               if(!numbers.contains(randomNumber)) {
-                   numbers.add(randomNumber)
-               }
-           }
+        val range = 1..(applicantList?.size ?: 0)
+        if ((applicantList?.size ?: 0) >= 20) {
+            while (numbers.size < 20) {
+                val randomNumber = random.nextInt(range.last - range.first + 1) + range.first
+                if (!numbers.contains(randomNumber)) {
+                    numbers.add(randomNumber)
+                }
+            }
+            Log.d("ssum", "$numbers")
+            //생성된 randomNumber의 index에 해당하는 applicant를 winnerList에 추가
+            for (number in numbers) {
+                winnerList.add(applicantList!![number - 1])
+                Log.d("ssum", "${applicantList!![number - 1]}")
+            }
+        } else {
+            winnerList.addAll(applicantList!!)
+            Log.d("ssum", "응모자 수 부족, 전원 당첨")
         }
-        Log.d("ssum", "$numbers")
-
-        //생성된 randomNumber의 index에 해당하는 applicant를 winnerList에 추가
-        val winnerList = ArrayList<String>()
-        for(number in numbers) {
-            winnerList.add(applicantList!![number])
-            Log.d("ssum", "${applicantList!![number]}")
-        }
-
         return winnerList
     }
 
-    private fun updateWinnerList(winnerList: ArrayList<String>) {
+    private fun updateWinnerList(documentId: String, winnerList: ArrayList<String>) {
         //DB에 winnerList 저장
-        var documentId = "movie_demo"
         val documentRef = db.collection("movie").document(documentId)
         documentRef.update("winners", winnerList)
-            .addOnCompleteListener { 
+            .addOnCompleteListener {
                 Log.d("ssum", "winners 추가 완료")
                 Toast.makeText(this, "추첨 결과 저장 완료", Toast.LENGTH_SHORT).show()
-            }.addOnFailureListener { 
+            }.addOnFailureListener {
                 Log.d("ssum", "winners 추가 실패")
             }
     }

@@ -50,12 +50,16 @@ class NoticeFragment : Fragment() {
             startActivity(intent)
         }
 
-            var db: FirebaseFirestore = FirebaseFirestore.getInstance()
+        if(MyApplication.managerMode != "on") {
+            binding.writeButton.visibility = View.GONE
+        }
 
-            // 공지사항 리사이클러뷰
-            nRecyclerView = binding.recyclerView
+        var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-            // 이전 버튼
+        // 공지사항 리사이클러뷰
+        nRecyclerView = binding.recyclerView
+
+        // 이전 버튼
 //        prevButton = binding.btnPrev
 //        prevButton.setOnClickListener {
 //            if (currentPage > 1) {
@@ -64,7 +68,7 @@ class NoticeFragment : Fragment() {
 //            }
 //        }
 
-            // 다음 버튼
+        // 다음 버튼
 //        nextButton = binding.btnNext
 //        nextButton.setOnClickListener {
 //            val totalPages = getTotalPages()
@@ -77,22 +81,23 @@ class NoticeFragment : Fragment() {
 //        // 페이지 번호 텍스트뷰
 //        pageNumberTextView = binding.pageNumber
 
-            /* initiate adapter */
-            nRecyclerAdapter = NoticeRecyclerAdapter()
+        /* initiate adapter */
+        nRecyclerAdapter = NoticeRecyclerAdapter()
 
-            /* initiate recyclerview */
-            nRecyclerView.adapter = nRecyclerAdapter
-            nRecyclerView.layoutManager = LinearLayoutManager(context)
+        /* initiate recyclerview */
+        nRecyclerView.adapter = nRecyclerAdapter
+        nRecyclerView.layoutManager = LinearLayoutManager(context)
 
-            /* adapt data */
-            noticeItems = ArrayList<NoticeItem>()
+        /* adapt data */
+        noticeItems = ArrayList<NoticeItem>()
 
 
 //        for (i in 1..30) { // 임의로 30개의 공지사항 아이템을 추가
 //            noticeItems.add(NoticeItem("id:${i}", "${i}번째 제목", "날짜", "본문"))
 //        }
 
-            db.collection("notice").orderBy("date", Query.Direction.DESCENDING).get().addOnCompleteListener { task ->
+        db.collection("notice").orderBy("date", Query.Direction.DESCENDING).get()
+            .addOnCompleteListener { task ->
                 for (document in task.result) {
                     noticeItems.add(document.toObject(NoticeItem::class.java))
                 }

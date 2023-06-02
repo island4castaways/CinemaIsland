@@ -15,17 +15,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.bumptech.glide.Glide
 import com.example.cinemaisland.databinding.ActivityMovieWriteBinding
 import com.example.cinemaisland.model.MovieItem
-import com.example.cinemaisland.util.dateTiemToString
+import com.example.cinemaisland.util.dateTimeToString
 import com.example.cinemaisland.util.dateToString
 import com.example.cinemaisland.util.stringToDate
 import com.example.cinemaisland.util.timeStringToDate
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.UploadTask
 import java.io.ByteArrayOutputStream
-import java.util.Date
 
 
 class MovieWriteActivity : BaseActivity() {
@@ -74,7 +71,7 @@ class MovieWriteActivity : BaseActivity() {
             binding.textViewTitle.setText(intentMovieItem.title)
             binding.textViewTitle.isEnabled =false
             binding.inputRaffleDate.setText(dateToString(intentMovieItem.raffleDate!!))
-            binding.Schedule.setText(dateTiemToString(intentMovieItem.schedule!!))
+            binding.Schedule.setText(dateTimeToString(intentMovieItem.schedule!!))
             binding.selectPhotoBtn.visibility= View.GONE
             val ratingIndex = ratingArray.indexOf(intentMovieItem.rating.toString())
             Log.d("ssum", "$ratingIndex")

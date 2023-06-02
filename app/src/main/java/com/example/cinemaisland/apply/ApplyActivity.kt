@@ -1,6 +1,6 @@
 package com.example.cinemaisland.apply
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,14 +14,13 @@ import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityApplyBinding
 import com.example.cinemaisland.model.Applicant
 import com.example.cinemaisland.model.MovieItem
+import com.example.cinemaisland.util.dateTimeToString
 import com.example.cinemaisland.util.stringToDate
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.FirebaseFirestore
-import java.util.Date
 import java.util.concurrent.TimeUnit
 
 class ApplyActivity : BaseActivity() {
@@ -31,16 +30,16 @@ class ApplyActivity : BaseActivity() {
     lateinit var email: String
     lateinit var birthDate: String
 
-    lateinit var movie: MovieItem
-
-//    val db: FirebaseFirestore = MyApplication.db
-
     var mode = "default"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityApplyBinding.inflate(layoutInflater)
         findViewById<FrameLayout>(R.id.activity_content).addView(binding.root)
+
+        val movieItem = intent.getSerializableExtra("movieItem") as? MovieItem
+        binding.movieTitle.text = movieItem!!.title
+        binding.movieSchedule.text = dateTimeToString(movieItem.schedule!!)
 
         /*
         firebase 인증 test
@@ -122,12 +121,14 @@ class ApplyActivity : BaseActivity() {
 
                                 //검색된 응모자의 movies에 현재 movie.title 존재하는지 확인
                                 val array = document["applied"] as ArrayList<String>
-                                if(array.contains("movie_demo2")) {
+                                if(array.contains("${movieItem.title}")) {
                                     Toast.makeText(this, "이미 응모된 시사회입니다.", Toast.LENGTH_SHORT).show()
                                 } else {
-                                    documentRef.update("applied", FieldValue.arrayUnion("movie_demo2"))
+                                    documentRef.update("applied", FieldValue.arrayUnion("${movieItem.title}"))
                                         .addOnCompleteListener {
                                             Log.d("ssum", "movies 값 추가 완료")
+                                            Toast.makeText(this, "응모가 정상적으로 처리되었습니다.", Toast.LENGTH_SHORT).show()
+                                            finish()
                                         }.addOnFailureListener {
                                             Log.d("ssum", "movies 값 추가 실패")
                                         }
@@ -135,11 +136,13 @@ class ApplyActivity : BaseActivity() {
                             }
                         }
                         if(!searched) {
-                            applicant.applied = arrayListOf("movie_demo")
+                            applicant.applied = arrayListOf("${movieItem.title}")
                             MyApplication.db.collection("applicant").document("$name$phone")
                                 .set(applicant)
                                 .addOnCompleteListener {
                                     Log.d("ssum", "응모자 추가 완료")
+                                    Toast.makeText(this, "응모가 정상적으로 처리되었습니다.", Toast.LENGTH_SHORT).show()
+                                    finish()
                                 }.addOnFailureListener {
                                     Log.d("ssum", "응모자 추가 실패")
                                 }

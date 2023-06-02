@@ -36,6 +36,10 @@ class EndEventFragment : Fragment() {
         val movieList: MutableList<MovieItem> = mutableListOf()
         var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
+        if(MyApplication.managerMode != "on") {
+            binding.movieWriteButton.visibility = View.GONE
+        }
+
         db.collection("movie")
             .orderBy("raffleDate", Query.Direction.DESCENDING)
             .get()
