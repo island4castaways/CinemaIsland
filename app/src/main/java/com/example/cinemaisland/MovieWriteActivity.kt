@@ -108,7 +108,7 @@ class MovieWriteActivity : BaseActivity() {
                         MovieItem.imageUrl=imageLink
 
                         db.collection("movie")
-                            .document("$title@d$director")
+                            .document("$title@$director")
                             .set(MovieItem)
                     }
                 }
