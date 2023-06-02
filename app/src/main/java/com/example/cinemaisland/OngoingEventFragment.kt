@@ -51,7 +51,7 @@ class OngoingEventFragment : Fragment() {
                 Log.d("ssum", "${movieList.toString()}")
                 binding.eventRecyclerView.adapter!!.notifyDataSetChanged()
 
-        }
+            }
 
         binding.eventRecyclerView.layoutManager = GridLayoutManager(context,2)
         binding.eventRecyclerView.adapter = MyAdapter(movieList)
