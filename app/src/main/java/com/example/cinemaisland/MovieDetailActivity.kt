@@ -1,11 +1,8 @@
 package com.example.cinemaisland
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
@@ -22,13 +19,12 @@ class MovieDetailActivity : BaseActivity() {
         val movieItem = intent.getSerializableExtra("movieItem") as? MovieItem
 
         if (movieItem != null) {
-            binding.titleText.text = "영화제목: ${movieItem.title}"
-            binding.directorText.text = "감독: ${movieItem.director}"
-            binding.genreText.text = "장르: ${movieItem.genre}"
-            binding.scheduleText.text = "시사회 날짜: ${movieItem.schedule.toString()}"
-            binding.raffleText.text = "추첨 날짜: ${movieItem.raffleDate.toString()}"
-            binding.detailText.text = "줄거리: ${movieItem.details}"
-            binding.
+            binding.titleText.text = "영화제목 : ${movieItem.title}"
+            binding.directorText.text = "감독 : ${movieItem.director}"
+            binding.genreText.text = "장르 : ${movieItem.genre}"
+            binding.scheduleText.text = "시사회 날짜 : ${movieItem.schedule.toString()}"
+            binding.raffleText.text = "추첨 날짜 : ${movieItem.raffleDate.toString()}"
+            binding.detailText.text = "${movieItem.details}"
             Glide.with(binding.moviePosterImageView.context).load(movieItem.imageUrl)
                 .into(binding.moviePosterImageView)
 

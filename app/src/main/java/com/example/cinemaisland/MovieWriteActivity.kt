@@ -7,23 +7,17 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import com.bumptech.glide.Glide
 import com.example.cinemaisland.databinding.ActivityMovieWriteBinding
 import com.example.cinemaisland.model.MovieItem
-import com.example.cinemaisland.util.dateTiemToString
-import com.example.cinemaisland.util.dateToString
 import com.example.cinemaisland.util.stringToDate
 import com.example.cinemaisland.util.timeStringToDate
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import java.io.ByteArrayOutputStream
 import java.util.Date
 
