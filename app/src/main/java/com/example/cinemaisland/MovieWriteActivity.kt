@@ -7,15 +7,21 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.bumptech.glide.Glide
 import com.example.cinemaisland.databinding.ActivityMovieWriteBinding
 import com.example.cinemaisland.model.MovieItem
+import com.example.cinemaisland.util.dateTiemToString
+import com.example.cinemaisland.util.dateToString
 import com.example.cinemaisland.util.stringToDate
 import com.example.cinemaisland.util.timeStringToDate
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import java.io.ByteArrayOutputStream
@@ -35,7 +41,7 @@ class MovieWriteActivity : BaseActivity() {
         var db: FirebaseFirestore = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
         val genreArray = resources.getStringArray(R.array.genre)
-        val ratingArray = resources.getIntArray(R.array.rating.toInt())
+        val ratingArray = resources.getStringArray(R.array.rating)
 
         //장르 spinner 설정
         val genreAdapter = ArrayAdapter.createFromResource(
@@ -70,7 +76,8 @@ class MovieWriteActivity : BaseActivity() {
             binding.inputRaffleDate.setText(dateToString(intentMovieItem.raffleDate!!))
             binding.Schedule.setText(dateTiemToString(intentMovieItem.schedule!!))
             binding.selectPhotoBtn.visibility= View.GONE
-            val ratingIndex = ratingArray.indexOf(intentMovieItem.rating)
+            val ratingIndex = ratingArray.indexOf(intentMovieItem.rating.toString())
+            Log.d("ssum", "$ratingIndex")
             binding.movieRatingSpinner.setSelection(ratingIndex)
         }
 

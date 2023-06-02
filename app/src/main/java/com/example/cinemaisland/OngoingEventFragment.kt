@@ -96,7 +96,7 @@ class MyAdapter(val datas:MutableList<MovieItem>):RecyclerView.Adapter<RecyclerV
 
         binding.moviePosterImageView.setOnClickListener {
             val intent = Intent(holder.itemView.context, MovieDetailActivity::class.java )
-            intent.putExtra("movieItem",movieItem)
+            intent.putExtra("movieItem", movieItem)
             holder.itemView.context.startActivity(intent)
         }
     }

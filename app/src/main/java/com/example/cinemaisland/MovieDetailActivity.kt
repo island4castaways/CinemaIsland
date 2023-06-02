@@ -1,8 +1,11 @@
 package com.example.cinemaisland
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
@@ -25,6 +28,7 @@ class MovieDetailActivity : BaseActivity() {
             binding.scheduleText.text = "시사회 날짜 : ${movieItem.schedule.toString()}"
             binding.raffleText.text = "추첨 날짜 : ${movieItem.raffleDate.toString()}"
             binding.detailText.text = "${movieItem.details}"
+            binding.ratingText.text = "관람 등급 : ${movieItem.rating}"
             Glide.with(binding.moviePosterImageView.context).load(movieItem.imageUrl)
                 .into(binding.moviePosterImageView)
 
@@ -57,7 +61,7 @@ class MovieDetailActivity : BaseActivity() {
                                 transaction.replace(R.id.viewpager, ongoingEventFragment).commit()
                             }
                             .addOnFailureListener { e ->
-                                Toast.makeText(this, "삭제에 실패하였습니다.",Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "삭제에 실패하였습니다.", Toast.LENGTH_SHORT).show()
                             }
                     }
                     alertDialogBuilder.setNegativeButton("취소") { dialog, which ->
@@ -71,10 +75,11 @@ class MovieDetailActivity : BaseActivity() {
 
         binding.movieModifyBtn.setOnClickListener {
             val intent = Intent(this, MovieWriteActivity::class.java)
-            intent.putExtra("movieItem",movieItem)
+            intent.putExtra("movieItem", movieItem)
             startActivity(intent)
         }
     }
+
     override fun getLayoutResId(): Int {
         return R.layout.activity_movie_detail
     }
