@@ -36,6 +36,12 @@ fun stringToDate(dateString: String): Date {
     return date
 }
 
+fun timeStringToDate(dateString: String): Date {
+    val inputFormat = SimpleDateFormat("yyyyMMdd-HH:mm")
+    val date = inputFormat.parse(dateString)
+    return date
+}
+
 fun addNationCode(msg: String): String {
     val firstNumber: String = msg.substring(0, 3)
     var phoneEdit = msg.substring(3)

@@ -47,7 +47,7 @@ abstract class BaseActivity : AppCompatActivity() {
                     true
                 }
                 R.id.winner ->{
-                    val intent = Intent(this, CheckResultActivity::class.java)    //아직 없어서 임의 지정
+                    val intent = Intent(this, CheckResultActivity::class.java)
                     startActivity(intent)
                     true
                 }

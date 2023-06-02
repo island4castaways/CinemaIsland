@@ -17,7 +17,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#0000FF"
+            android:background="@color/Island3"
             app:tabTextColor="@color/black"/>
 
     </com.google.android.material.appbar.AppBarLayout>

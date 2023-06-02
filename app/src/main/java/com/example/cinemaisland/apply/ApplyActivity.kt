@@ -8,6 +8,8 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import com.example.cinemaisland.BaseActivity
 import com.example.cinemaisland.MyApplication
+import com.example.cinemaisland.MyApplication.Companion.auth
+import com.example.cinemaisland.MyApplication.Companion.db
 import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityApplyBinding
 import com.example.cinemaisland.model.Applicant
@@ -18,6 +20,7 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
@@ -29,6 +32,8 @@ class ApplyActivity : BaseActivity() {
     lateinit var birthDate: String
 
     lateinit var movie: MovieItem
+
+//    val db: FirebaseFirestore = MyApplication.db
 
     var mode = "default"
 
@@ -64,7 +69,7 @@ class ApplyActivity : BaseActivity() {
                 }
             }
 
-            val optionsCompat = PhoneAuthOptions.newBuilder(MyApplication.auth)
+            val optionsCompat = PhoneAuthOptions.newBuilder(auth)
                 .setPhoneNumber(phone)
                 .setTimeout(60L, TimeUnit.SECONDS)
                 .setActivity(this)
@@ -72,7 +77,7 @@ class ApplyActivity : BaseActivity() {
                 .build()
 
             PhoneAuthProvider.verifyPhoneNumber(optionsCompat)
-            MyApplication.auth.setLanguageCode("kr")
+            auth.setLanguageCode("kr")
         }
 
         //authBtn 클릭시
@@ -105,10 +110,10 @@ class ApplyActivity : BaseActivity() {
                 applicant.email = email
                 applicant.birthDate = stringToDate(birthDate)
                 applicant.id = "$name$phone"
-                val documentRef = MyApplication.db.collection("applicant").document("$name$phone")
+                val documentRef = db.collection("applicant").document("$name$phone")
                 var searched: Boolean = false
 
-                MyApplication.db.collection("applicant").get()
+                db.collection("applicant").get()
                     .addOnCompleteListener { task ->
                         for(document in task.result) {
                             if(document.id == "$name$phone") {
