@@ -68,30 +68,4 @@ class NoticeRecyclerAdapter : RecyclerView.Adapter<NoticeRecyclerAdapter.ViewHol
             }
         }
     }
-
-    private fun updateNoticeList() {
-//        val start = (currentPage - 1) * itemsPerPage
-//        val end = minOf(start + itemsPerPage, noticeList.size)
-//        val sublist = noticeList.subList(start, end)
-//        notifyDataSetChanged()
-    }
-
-//    fun goToPreviousPage() {
-//        if (currentPage > 1) {
-//            currentPage--
-//            updateNoticeList()
-//        }
-//    }
-//
-//    fun goToNextPage() {
-//        val totalPages = getTotalPages()
-//        if (currentPage < totalPages) {
-//            currentPage++
-//            updateNoticeList()
-//        }
-//    }
-//
-//    private fun getTotalPages(): Int {
-//        return (noticeList.size + itemsPerPage - 1) / itemsPerPage
-//    }
 }
