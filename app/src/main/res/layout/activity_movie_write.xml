@@ -83,17 +83,14 @@
                 android:layout_below="@id/director"/>
 
 
-            <LinearLayout
-                android:id="@+id/pic_genre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_below="@id/movie_genre">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:id="@+id/pic_genre"
+                android:layout_below="@+id/movie_genre">
                 <Spinner
                     android:id="@+id/genre_spinner"
                     android:layout_width="match_parent"
@@ -102,13 +99,27 @@
 
             </LinearLayout>
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/movie_rating_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pic_genre"
+                android:layout_marginTop="15dp"
+                android:text="관람 등급"
+                android:textSize="14dp" />
+
+            <Spinner
+                android:id="@+id/movie_rating_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/movie_rating_text"
+                android:layout_marginTop="10dp" />
 
             <TextView
                 android:id="@+id/movie_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/pic_genre"
+                android:layout_below="@id/movie_rating_spinner"
                 android:layout_marginTop="15dp"
                 android:text="내용"
                 android:textSize="14dp" />

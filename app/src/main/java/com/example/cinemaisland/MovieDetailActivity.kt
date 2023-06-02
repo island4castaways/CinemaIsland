@@ -1,8 +1,11 @@
 package com.example.cinemaisland
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
@@ -25,6 +28,7 @@ class MovieDetailActivity : BaseActivity() {
             binding.scheduleText.text = "시사회 날짜: ${movieItem.schedule.toString()}"
             binding.raffleText.text = "추첨 날짜: ${movieItem.raffleDate.toString()}"
             binding.detailText.text = "줄거리: ${movieItem.details}"
+            binding.
             Glide.with(binding.moviePosterImageView.context).load(movieItem.imageUrl)
                 .into(binding.moviePosterImageView)
 
@@ -42,16 +46,37 @@ class MovieDetailActivity : BaseActivity() {
                 }
             } else {
                 binding.movieDeleteBtn.setOnClickListener {
-                    MyApplication.db.collection("movie")
-                        .document("${movieItem!!.title}@${movieItem!!.director}")
-                        .delete()
 
-                    val ongoingEventFragment: OngoingEventFragment = OngoingEventFragment()
-                    val manager: FragmentManager = supportFragmentManager
-                    val transaction: FragmentTransaction = manager.beginTransaction()
-                    transaction.replace(R.id.viewpager, ongoingEventFragment).commit()
+                    val alertDialogBuilder = AlertDialog.Builder(this)
+                    alertDialogBuilder.setTitle("확인")
+                    alertDialogBuilder.setMessage("정말로 삭제하시겠습니까?")
+                    alertDialogBuilder.setPositiveButton("확인") { dialog, which ->
+                        MyApplication.db.collection("movie")
+                            .document("${movieItem!!.title}@${movieItem!!.director}")
+                            .delete()
+                            .addOnSuccessListener {
+                                val ongoingEventFragment = OngoingEventFragment()
+                                val manager: FragmentManager = supportFragmentManager
+                                val transaction: FragmentTransaction = manager.beginTransaction()
+                                transaction.replace(R.id.viewpager, ongoingEventFragment).commit()
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "삭제에 실패하였습니다.",Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                    alertDialogBuilder.setNegativeButton("취소") { dialog, which ->
+                        // 취소 버튼을 눌렀을 때 수행할 작업
+                    }
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
                 }
             }
+        }
+
+        binding.movieModifyBtn.setOnClickListener {
+            val intent = Intent(this, MovieWriteActivity::class.java)
+            intent.putExtra("movieItem",movieItem)
+            startActivity(intent)
         }
     }
     override fun getLayoutResId(): Int {

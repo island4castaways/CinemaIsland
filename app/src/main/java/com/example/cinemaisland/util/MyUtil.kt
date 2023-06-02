@@ -25,8 +25,13 @@ fun checkPermission(activity: AppCompatActivity, permissions: Array<String>) {
     }
 }
 
-fun dateToString(date: String): String {
-    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+fun dateTiemToString(date: Date): String {
+    val sdf = SimpleDateFormat("yyyyMMdd-HH:mm")
+    return sdf.format(date)
+}
+
+fun dateToString(date:Date): String{
+    val sdf = SimpleDateFormat("yyyyMMdd")
     return sdf.format(date)
 }
 
