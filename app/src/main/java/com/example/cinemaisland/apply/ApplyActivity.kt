@@ -54,7 +54,7 @@ class ApplyActivity : BaseActivity() {
             binding.auth.visibility = View.VISIBLE
 
             phone = binding.inputPhone.text.toString()
-            
+
             val callbacks = object: PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 override fun onVerificationCompleted(p0: PhoneAuthCredential) {
                     Log.d("ssum", "Verification completed")
@@ -154,10 +154,10 @@ class ApplyActivity : BaseActivity() {
     override fun getLayoutResId(): Int {
         return R.layout.activity_apply
     }
-    
+
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         MyApplication.auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task -> 
+            .addOnCompleteListener(this) { task ->
                 if(task.isSuccessful) {
                     //인증 성공
                     Log.d("ssum", "휴대폰 번호 인증 성공")
