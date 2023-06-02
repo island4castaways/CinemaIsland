@@ -70,6 +70,8 @@ dependencies {
     //glide 사용 설정
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     implementation 'com.github.bumptech.glide:compiler:4.13.2'
+    // 구글 지도 사용 선언
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
 
     //Coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'

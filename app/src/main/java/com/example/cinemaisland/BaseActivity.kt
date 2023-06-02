@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.cinemaisland.check.CheckResultActivity
 import com.example.cinemaisland.databinding.ActivityBaseBinding
 import com.example.cinemaisland.databinding.ActivityBoardBinding
 import com.example.cinemaisland.manager.LoginActivity

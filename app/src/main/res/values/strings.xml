@@ -4,10 +4,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_opened">Opened Drawer</string>
     <string name="drawer_closed">closed Drawer</string>
-    <string name="theater_info">상영관 정보</string>
+    <string name="theater_info">소개</string>
     <string name="theater_info2">사람들과 즐겁게 공유할 수 있는,
 시네마 아일랜드를 경험한 오늘을 행복한 마음으로 공유할 수 있도록
 </string>
     <string name="theater_info3">Enjoy the movie at Cinema Island in advance!</string>
     <string name="location">찾아 오시는 길</string>
+    <string name="intro">소개:
+CinemaIsland는 모바일 인증 결재 기반으로 한 영화 시사회 응모를 간편하게 할 수 있는 어플리케이션입니다.
+        이 어플은 영화 팬들에게 최신 영화 시사회에 참여하고 미리 영화를 감상하는 기회를 제공합니다.
+    </string>
 </resources>
