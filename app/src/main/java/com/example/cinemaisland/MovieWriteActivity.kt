@@ -12,6 +12,8 @@ import android.widget.FrameLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.cinemaisland.databinding.ActivityMovieWriteBinding
 import com.example.cinemaisland.model.MovieItem
+import com.example.cinemaisland.util.stringToDate
+import com.example.cinemaisland.util.timeStringToDate
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -96,7 +98,7 @@ class MovieWriteActivity : BaseActivity() {
                         val imageLink = uri.toString()
 
                         val MovieItem = MovieItem()
-                        MovieItem.id = "$title@$pickDate"
+                        MovieItem.id = "$title@$director"
                         MovieItem.title = title
                         MovieItem.genre = genre
                         MovieItem.director = director
@@ -106,15 +108,13 @@ class MovieWriteActivity : BaseActivity() {
                         MovieItem.imageUrl=imageLink
 
                         db.collection("movie")
-                            .document("$title@pickDate")
+                            .document("$title@d$director")
                             .set(MovieItem)
                     }
                 }
 
         }
     }
-
-
     override fun getLayoutResId(): Int {
         return R.layout.activity_movie_write
     }

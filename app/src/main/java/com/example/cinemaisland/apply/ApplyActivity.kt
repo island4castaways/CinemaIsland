@@ -8,13 +8,14 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import com.example.cinemaisland.BaseActivity
 import com.example.cinemaisland.MyApplication
+import com.example.cinemaisland.MyApplication.Companion.auth
+import com.example.cinemaisland.MyApplication.Companion.db
 import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityApplyBinding
 import com.example.cinemaisland.model.Applicant
 import com.example.cinemaisland.model.MovieItem
 import com.example.cinemaisland.util.stringToDate
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
@@ -24,8 +25,6 @@ import java.util.Date
 import java.util.concurrent.TimeUnit
 
 class ApplyActivity : BaseActivity() {
-    val db: FirebaseFirestore = MyApplication.db
-    val auth: FirebaseAuth = MyApplication.auth
     lateinit var binding: ActivityApplyBinding
     lateinit var name: String
     lateinit var phone: String
@@ -33,6 +32,8 @@ class ApplyActivity : BaseActivity() {
     lateinit var birthDate: String
 
     lateinit var movie: MovieItem
+
+//    val db: FirebaseFirestore = MyApplication.db
 
     var mode = "default"
 
