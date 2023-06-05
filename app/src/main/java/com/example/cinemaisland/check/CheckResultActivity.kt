@@ -114,7 +114,7 @@ class CheckResultActivity : BaseActivity() {
                 val itemList = mutableListOf<MovieItem>()
                 for (document in task.result) {
                     for (movie in moviesList) {
-                        if (document.data.getValue("title") == "$movie") {
+                        if (document.data.getValue("id") == "$movie") {
                             val item = document.toObject(MovieItem::class.java)
                             itemList.add(item)
                             Log.d("ssum", "${itemList}")

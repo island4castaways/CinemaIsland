@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "1028071388369-3fm12blnbpspgqp1k4h9gt1rm1bfjfrq.apps.googleusercontent.com",
+          "client_id": "1028071388369-jhtc12of3tvdh1kum273hqmb6non0td0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.cinemaisland",
-            "certificate_hash": "3cd70315f044e3f2f322381b506af4be8c46db28"
+            "certificate_hash": "6dd80196eff8915a22fa72fe5a6ff6f3e423e31b"
           }
         },
         {
