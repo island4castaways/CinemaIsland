@@ -15,11 +15,13 @@
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/writeButton"
+        android:backgroundTint="#FBDF88"
+        app:elevation="7dp"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="10dp"
-        android:text="+"/>
+        android:text=" +"/>
 
 </RelativeLayout>
