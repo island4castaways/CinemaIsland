@@ -12,6 +12,7 @@ import com.example.cinemaisland.databinding.ActivityRaffleBinding
 import com.example.cinemaisland.model.MovieItem
 import com.example.cinemaisland.util.dateTimeToString
 import com.example.cinemaisland.util.dateToString
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RaffleActivity : BaseActivity() {
@@ -75,7 +76,8 @@ class RaffleActivity : BaseActivity() {
             binding.raffleBtn.visibility = View.GONE
             winnerList = runRaffle()
             updateWinnerList("$movieTitle@${movieItem.director}", winnerList!!)
-            for (winner in winnerList!!) {
+            updateWonList(winnerList!!, movieItem)
+            for(winner in winnerList!!) {
                 winnerText += "$winner\n"
             }
             binding.winnerList.text = winnerText
@@ -119,6 +121,16 @@ class RaffleActivity : BaseActivity() {
             }.addOnFailureListener {
                 Log.d("ssum", "winners 추가 실패")
             }
+    }
+    
+    private fun updateWonList(winnerList: ArrayList<String>, movieItem: MovieItem) {
+        //applicant의 won 필드에 영화 정보 추가
+        for(winner in winnerList) {
+            val documentId = "$winner"
+            db.collection("applicant").document(documentId)
+                .update("won", FieldValue.arrayUnion("${movieItem.title}@${movieItem.director}"))
+            Log.d("ssum", "applicant $documentId, won에 ${movieItem.title}@${movieItem.director} 추가 완료")
+        }
     }
 
     override fun getLayoutResId(): Int {

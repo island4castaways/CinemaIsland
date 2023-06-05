@@ -47,12 +47,13 @@ fun timeStringToDate(dateString: String): Date {
     return date
 }
 
-fun addNationCode(msg: String): String {
-    val firstNumber: String = msg.substring(0, 3)
-    var phoneEdit = msg.substring(3)
+fun addNationCode(phoneOrig: String): String {
+    val firstNumber: String = phoneOrig.substring(0, 3)
+    var phoneEdit = phoneOrig.substring(3)
 
     when(firstNumber) {
         "010" -> phoneEdit = "+8210$phoneEdit"
+        else -> phoneEdit = "$phoneOrig"
     }
 
     Log.d("ssum", "국가코드로 변경된 번호, $phoneEdit")

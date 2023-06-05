@@ -75,7 +75,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/auth"
+            android:id="@+id/authView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:text="이메일"
             android:textSize="15dp"
-            android:layout_below="@id/auth"
+            android:layout_below="@id/authView"
             android:layout_marginBottom="5dp" />
 
         <EditText

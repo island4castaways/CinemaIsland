@@ -2,6 +2,7 @@ package com.example.cinemaisland
 
 import androidx.multidex.MultiDexApplication
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -16,6 +17,7 @@ class MyApplication: MultiDexApplication() {
 
         //전화번호 인증
         var verificationId = ""
+        var resendToken: PhoneAuthProvider.ForceResendingToken? = null
 
         //관리자 모드 여부
         var managerMode = "off"
