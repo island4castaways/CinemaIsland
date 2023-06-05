@@ -52,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
+            android:hint="ex) 01012345678"
             android:layout_below="@id/checkPhone"
             android:layout_marginTop="15dp" />
 
@@ -69,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
+            android:hint="ex) example@naver.com"
             android:layout_below="@id/checkEmail"
             android:layout_marginTop="15dp" />
 
@@ -84,7 +86,7 @@
 
     <RelativeLayout
         android:id="@+id/resultView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
         <androidx.recyclerview.widget.RecyclerView

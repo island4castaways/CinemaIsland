@@ -17,7 +17,7 @@ class ResultRecyclerAdapter(val context: Context, val itemList: MutableList<Movi
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ResultViewHolder(ItemResultBinding.inflate(layoutInflater))
+        return ResultViewHolder(ItemResultBinding.inflate(layoutInflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: ResultViewHolder, position: Int) {

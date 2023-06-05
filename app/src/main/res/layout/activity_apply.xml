@@ -65,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="phone"
+                android:hint="ex) 01012345678"
                 android:layout_marginRight="5dp" />
 
             <Button
@@ -124,6 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/emailText"
             android:inputType="textEmailAddress"
+            android:hint="ex) example@naver.com"
             android:layout_marginBottom="10dp" />
 
         <TextView
@@ -141,6 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/birthDateText"
             android:inputType="date"
+            android:hint="ex) 20001231"
             android:layout_marginBottom="10dp" />
 
         <Button
