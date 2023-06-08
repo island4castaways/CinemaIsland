@@ -27,6 +27,8 @@ class MovieDetailActivity : BaseActivity() {
             binding.movieModifyBtn.visibility = View.GONE
             binding.movieDeleteBtn.visibility = View.GONE
             binding.movieRaffleBtn.visibility = View.GONE
+        }else{
+            binding.applyBtn.visibility = View.GONE
         }
 
         if (movieItem != null) {
