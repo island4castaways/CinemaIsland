@@ -2,6 +2,7 @@ package com.example.cinemaisland
 
 import androidx.multidex.MultiDexApplication
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
@@ -14,16 +15,24 @@ class MyApplication: MultiDexApplication() {
         lateinit var db: FirebaseFirestore
         lateinit var storage: FirebaseStorage
 
-        var email: String? = null
+        //전화번호 인증
+        var verificationId = ""
+        var resendToken: PhoneAuthProvider.ForceResendingToken? = null
 
-        fun checkAuth(): Boolean {
-            val currentUser = auth.currentUser
-            return currentUser?.let {
-                email = currentUser.email
-                if(currentUser.isEmailVerified) true
-                else false
-            } ?: let { false }
-        }
+        //관리자 모드 여부
+        var managerMode = "off"
+
+        //email 인증 사용시
+//        var email: String? = null
+//
+//        fun checkAuth(): Boolean {
+//            val currentUser = auth.currentUser
+//            return currentUser?.let {
+//                email = currentUser.email
+//                if(currentUser.isEmailVerified) true
+//                else false
+//            } ?: let { false }
+//        }
     }
 
     override fun onCreate() {

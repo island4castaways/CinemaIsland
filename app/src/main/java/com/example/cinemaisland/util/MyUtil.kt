@@ -1,6 +1,7 @@
 package com.example.cinemaisland.util
 
 import android.content.pm.PackageManager
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,37 @@ fun checkPermission(activity: AppCompatActivity, permissions: Array<String>) {
     }
 }
 
-fun dateToString(date: Date): String {
-    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+fun dateTimeToString(date: Date): String {
+    val sdf = SimpleDateFormat("yyyyMMdd-HH:mm")
     return sdf.format(date)
+}
+
+fun dateToString(date:Date): String{
+    val sdf = SimpleDateFormat("yyyyMMdd")
+    return sdf.format(date)
+}
+
+fun stringToDate(dateString: String): Date {
+    val inputFormat = SimpleDateFormat("yyyyMMdd")
+    val date = inputFormat.parse(dateString)
+    return date
+}
+
+fun timeStringToDate(dateString: String): Date {
+    val inputFormat = SimpleDateFormat("yyyyMMdd-HH:mm")
+    val date = inputFormat.parse(dateString)
+    return date
+}
+
+fun addNationCode(phoneOrig: String): String {
+    val firstNumber: String = phoneOrig.substring(0, 3)
+    var phoneEdit = phoneOrig.substring(3)
+
+    when(firstNumber) {
+        "010" -> phoneEdit = "+8210$phoneEdit"
+        else -> phoneEdit = "$phoneOrig"
+    }
+
+    Log.d("ssum", "국가코드로 변경된 번호, $phoneEdit")
+    return phoneEdit
 }

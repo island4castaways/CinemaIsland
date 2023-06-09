@@ -1,17 +1,23 @@
 package com.example.cinemaisland.manager
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.Toast
+import com.example.cinemaisland.BaseActivity
+import com.example.cinemaisland.HomeActivity
+import com.example.cinemaisland.MyApplication
+import com.example.cinemaisland.R
 import com.example.cinemaisland.databinding.ActivityLoginBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     lateinit var binding: ActivityLoginBinding
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    var mode = "logout"
 
     /* DB에 저장된 관리자 정보
     managerId : admin
@@ -20,7 +26,10 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        //툴바 적용
+        findViewById<FrameLayout>(R.id.activity_content).addView(binding.root)
+
+        updateView()
 
         //로그인 버튼 클릭시
         binding.loginBtn.setOnClickListener {
@@ -36,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
                         if(document.data.getValue("id").toString().equals(adminId) &&
                                 document.data.getValue("password").toString().equals(adminPw)) {
                             Log.d("ssum", "Manager Login successed")
-                            mode = "login"
+                            MyApplication.managerMode = "on"
                             updateView()
                         } else {
                             //로그인 실패시
@@ -52,23 +61,28 @@ class LoginActivity : AppCompatActivity() {
         //로그아웃 버튼 클릭시
         binding.logoutBtn.setOnClickListener {
             Log.d("ssum", "logoutBtn Clicked")
-            mode = "logout"
+            MyApplication.managerMode = "off"
             //EditTextView 비우기
             binding.inputId.text.clear()
             binding.inputPw.text.clear()
             updateView()
+
+            //로그아웃 버튼 클릭시 홈으로 이동
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
     fun updateView() {
-        if(mode === "login") {   //로그인 상태
+        if(MyApplication.managerMode == "on") {   //로그인 상태
             //loginView 보이지 않게 설정
             binding.loginView.visibility = View.GONE
             //title text 변경
             binding.title.text = "관리자 모드"
             //logoutBtn 보이게 설정
             binding.logoutBtn.visibility = View.VISIBLE
-        } else if(mode === "logout") {   //로그아웃 상태
+        } else if(MyApplication.managerMode == "off") {   //로그아웃 상태
             //loginView 보이게 설정
             binding.loginView.visibility = View.VISIBLE
             //title text 변경
@@ -76,5 +90,9 @@ class LoginActivity : AppCompatActivity() {
             //logoutBtn 보이지 않게 설정
             binding.logoutBtn.visibility = View.GONE
         }
+
+    }
+    override fun getLayoutResId(): Int {
+        return R.layout.activity_login
     }
 }

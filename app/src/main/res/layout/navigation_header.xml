@@ -2,11 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="#FF0000">
+    android:background="@color/Island2">
+
+    <ImageView
+        android:layout_width="165dp"
+        android:layout_height="114dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/png_logo" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="바로가기"
+        android:text="Menu"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"

@@ -52,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
+            android:hint="ex) 01012345678"
             android:layout_below="@id/checkPhone"
             android:layout_marginTop="15dp" />
 
@@ -69,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
+            android:hint="ex) example@naver.com"
             android:layout_below="@id/checkEmail"
             android:layout_marginTop="15dp" />
 
@@ -76,7 +78,7 @@
             android:id="@+id/submitBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="입장권 확인"
+            android:text="응모 결과 확인"
             android:layout_below="@id/inputEmail"
             android:layout_marginVertical="15dp"
             android:layout_centerHorizontal="true" />
@@ -84,22 +86,13 @@
 
     <RelativeLayout
         android:id="@+id/resultView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
-        <TextView
-            android:id="@+id/resultText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="응모 결과"
-            android:layout_marginVertical="10dp"
-            android:layout_centerHorizontal="true" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/resultRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/resultText"
             android:layout_marginTop="10dp" />
 
         <Button

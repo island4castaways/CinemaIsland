@@ -1,10 +1,6 @@
 package com.example.cinemaisland
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import android.widget.FrameLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
@@ -44,7 +40,7 @@ class BoardActivity : BaseActivity() {
     class MyPageAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
         val fragments: List<Fragment>
         init {
-            fragments = listOf(NotificationFragment(), OngoingEventFragment(), EndEventFragment())
+            fragments = listOf(NoticeFragment(), OngoingEventFragment(), EndEventFragment())
         }
 
         override fun getItemCount(): Int = fragments.size
