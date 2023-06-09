@@ -28,7 +28,8 @@
         android:layout_height="wrap_content"
         android:text=" 응모시 입력한 개인 정보는 당일 현장에서 티켓 수령시 본인 확인에 사용되는 정보입니다.\n 정확한 정보로 입력해주세요."
         android:textSize="15dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:padding="20dp" />
 
     <RelativeLayout
         android:id="@+id/inputView"
